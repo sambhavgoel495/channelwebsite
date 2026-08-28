@@ -45,7 +45,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 6 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 4 },
   { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 2 },
 ];
 
@@ -209,80 +209,6 @@ export const MOCK_BUNDLES: Bundle[] = [
       '9:16 1080p Clean MP4 Files',
       'Includes Music-Ready Silent & Audio Tracks',
       'Unrestricted Social Media Monetization'
-    ]
-  },
-  {
-    id: '5',
-    title: 'Daily Toddler Antics',
-    slug: 'daily-toddler-antics',
-    tagline: 'Relatable everyday toddler chaos & playtime',
-    description: 'Everyday silly antics, playground fun, and relatable toddler chaos that parents love to share.',
-    price: 89,
-    originalPrice: 249,
-    videoCount: 40,
-    category: 'Funny Moments',
-    categoryBadge: 'PLAYTIME',
-    formatBadge: '9:16 VERTICAL HD',
-    quality: '1080p 9:16 Vertical',
-    thumbnail: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80',
-    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-playing-with-colorful-blocks-42646-large.mp4',
-    isPopular: false,
-    rating: 4.7,
-    reviewsCount: 140,
-    freeDemos: [SAMPLE_VIDEOS[3], SAMPLE_VIDEOS[1]],
-    lockedVideosCount: 38,
-    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
-      id: `dta-${i + 1}`,
-      title: `Playtime Antics Clip #${i + 1}`,
-      duration: `0:${12 + (i % 6)}`,
-      thumbnail: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-playing-with-colorful-blocks-42646-large.mp4',
-      format: '9:16 Vertical HD',
-      isLocked: true,
-      category: 'Funny Moments'
-    })),
-    whatsInside: [
-      '40 Relatable Daily Life Videos',
-      'Clean 9:16 Aspect Ratio',
-      'High Contrast Colors & Clear Motion',
-      'Commercial License Included'
-    ]
-  },
-  {
-    id: '6',
-    title: 'Wholesome Baby Moments',
-    slug: 'wholesome-baby-moments',
-    tagline: 'Heartwarming bonding, hugs & gentle laughter',
-    description: 'Heartwarming interactions, baby laughter, animal interactions, and wholesome family moments.',
-    price: 139,
-    originalPrice: 379,
-    videoCount: 80,
-    category: 'Cute Reactions',
-    categoryBadge: 'WHOLESOME',
-    formatBadge: '9:16 VERTICAL HD',
-    quality: '1080p 9:16 Vertical',
-    thumbnail: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
-    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-playing-with-a-stuffed-animal-42358-large.mp4',
-    isPopular: false,
-    rating: 4.9,
-    reviewsCount: 275,
-    freeDemos: [SAMPLE_VIDEOS[2], SAMPLE_VIDEOS[0]],
-    lockedVideosCount: 78,
-    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
-      id: `wbm-${i + 1}`,
-      title: `Wholesome Clip #${i + 1}`,
-      duration: `0:${14 + (i % 7)}`,
-      thumbnail: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=400&q=80',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-playing-with-a-stuffed-animal-42358-large.mp4',
-      format: '9:16 Vertical HD',
-      isLocked: true,
-      category: 'Cute Reactions'
-    })),
-    whatsInside: [
-      '80 Heartwarming Video Clips',
-      '9:16 HD Vertical MP4 Files',
-      'No Watermarks',
-      'Commercial Usage Approved'
     ]
   }
 ];

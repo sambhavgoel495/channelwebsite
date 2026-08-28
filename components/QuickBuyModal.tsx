@@ -7,33 +7,152 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useRouter } from 'next/navigation';
 
+import { supabase } from '@/lib/supabase';
+
+const loadRazorpayScript = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined') return resolve(false);
+    if ((window as any).Razorpay) return resolve(true);
+
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 export const QuickBuyModal: React.FC = () => {
-  const { quickBuyBundle, closeQuickBuy, purchaseBundle } = useAuth();
+  const { quickBuyBundle, closeQuickBuy, purchaseBundle, refetchPurchases, user, addToast } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card'>('upi');
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
 
   if (!quickBuyBundle) return null;
 
-  const handleConfirmPurchase = () => {
+  const handleConfirmPurchase = async () => {
     setIsProcessing(true);
-    setTimeout(() => {
-      setIsProcessing(false);
-      const success = purchaseBundle(quickBuyBundle.id);
-      if (success) {
-        try {
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 }
-          });
-        } catch (e) {
-          // fallback
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const accessToken = session?.access_token;
+
+      // 1. Attempt Real Razorpay Order Creation if server credentials exist
+      if (accessToken) {
+        const createRes = await fetch('/api/razorpay/create-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            bundleId: quickBuyBundle.id,
+          }),
+        });
+
+        const orderData = await createRes.json();
+
+        if (orderData.success && orderData.orderId) {
+          const scriptLoaded = await loadRazorpayScript();
+          if (!scriptLoaded || !(window as any).Razorpay) {
+            addToast('Failed to load Razorpay payment gateway SDK. Please check connection.', 'error');
+            setIsProcessing(false);
+            return;
+          }
+
+          const options = {
+            key: orderData.keyId,
+            amount: orderData.amount,
+            currency: orderData.currency || 'INR',
+            name: 'LittleVault',
+            description: `Unlock ${quickBuyBundle.title}`,
+            order_id: orderData.orderId,
+            prefill: {
+              name: user?.name || '',
+              email: user?.email || '',
+              contact: user?.phone || '',
+            },
+            config: {
+              display: {
+                blocks: {
+                  upi: {
+                    name: 'Pay via UPI / QR Code',
+                    instruments: [
+                      {
+                        method: 'upi',
+                      },
+                    ],
+                  },
+                },
+                sequence: ['block.upi'],
+                preferences: {
+                  show_default_blocks: true,
+                },
+              },
+            },
+            theme: {
+              color: '#f97316',
+            },
+            handler: async function (response: any) {
+              try {
+                setIsProcessing(true);
+                const verifyRes = await fetch('/api/razorpay/verify-payment', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                    bundleId: quickBuyBundle.id,
+                  }),
+                });
+
+                const verifyData = await verifyRes.json();
+                if (verifyData.success) {
+                  await refetchPurchases();
+                  try {
+                    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+                  } catch (e) {}
+                  closeQuickBuy();
+                  router.push('/my-library');
+                } else {
+                  addToast(verifyData.error || 'Payment verification failed.', 'error');
+                }
+              } catch (err: any) {
+                addToast('Error verifying payment with server.', 'error');
+              } finally {
+                setIsProcessing(false);
+              }
+            },
+            modal: {
+              ondismiss: function () {
+                setIsProcessing(false);
+              },
+            },
+          };
+
+          const rzp = new (window as any).Razorpay(options);
+          rzp.open();
+          return;
+        } else {
+          addToast(orderData.error || 'Failed to create Razorpay order.', 'error');
+          setIsProcessing(false);
+          return;
         }
-        closeQuickBuy();
-        router.push('/my-library');
+      } else {
+        addToast('Please log in to purchase video bundles.', 'error');
+        setIsProcessing(false);
+        return;
       }
-    }, 1200);
+    } catch (e: any) {
+      console.error('Error initiating Razorpay checkout:', e);
+      addToast(e.message || 'An unexpected error occurred during checkout.', 'error');
+      setIsProcessing(false);
+      return;
+    }
   };
 
   return (

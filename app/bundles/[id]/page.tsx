@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
-import { MOCK_BUNDLES, SAMPLE_VIDEOS } from '@/data/mockData';
+import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { 
   Play, 
@@ -24,13 +24,112 @@ export default function BundleDetailsPage() {
   const id = params.id as string;
   const { openQuickBuy, openVideoPreview, hasPurchased, addToast } = useAuth();
 
-  const bundle = MOCK_BUNDLES.find(b => b.id === id || b.slug === id) || MOCK_BUNDLES[0];
+  const [bundle, setBundle] = useState<any>(null);
+  const [videos, setVideos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadBundle = async () => {
+    setLoading(true);
+    setError(null);
+
+    // Try finding bundle by ID first
+    let { data: bundleData, error: bundleError } = await supabase
+      .from('bundles')
+      .select('*')
+      .eq('id', id)
+      .maybeSingle();
+
+    // Fallback: try finding bundle by slug
+    if (!bundleData && !bundleError) {
+      const { data: slugBundle, error: slugError } = await supabase
+        .from('bundles')
+        .select('*')
+        .eq('slug', id)
+        .maybeSingle();
+
+      bundleData = slugBundle;
+      bundleError = slugError;
+    }
+
+    if (bundleError) {
+      console.error('Bundle fetch error:', bundleError);
+      setError(bundleError.message || 'Failed to load bundle details from Supabase.');
+      setLoading(false);
+      return;
+    }
+
+    if (!bundleData) {
+      setBundle(null);
+      setLoading(false);
+      return;
+    }
+
+    setBundle(bundleData);
+
+    // Fetch videos belonging to this bundle from public.videos
+    const { data: videoData, error: videoError } = await supabase
+      .from('videos')
+      .select('*')
+      .eq('bundle_id', bundleData.id)
+      .order('created_at', { ascending: true });
+
+    if (videoError) {
+      console.error('Videos fetch error from Supabase:', videoError);
+    } else {
+      setVideos(videoData || []);
+    }
+
+    setLoading(false);
+  };
+
+  React.useEffect(() => {
+    loadBundle();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+        <p className="text-sm font-bold text-slate-500">
+          Loading bundle & demo videos...
+        </p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4 bg-rose-50 border border-rose-200 rounded-3xl m-8 p-8">
+        <h2 className="text-xl font-black text-rose-800">
+          Failed to load bundle videos from Supabase
+        </h2>
+        <p className="text-xs text-rose-600 font-medium max-w-md mx-auto">
+          {error}
+        </p>
+        <button
+          onClick={loadBundle}
+          className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-black rounded-xl shadow-md transition-colors"
+        >
+          Retry Loading
+        </button>
+      </div>
+    );
+  }
+
+  if (!bundle) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+        <h2 className="text-xl font-black text-slate-900">
+          Bundle not found
+        </h2>
+      </div>
+    );
+  }
+
   const isPurchased = hasPurchased(bundle.id);
 
-  // Demo clips for this bundle
-  const demoClips = bundle.freeDemos && bundle.freeDemos.length >= 2 
-    ? bundle.freeDemos 
-    : SAMPLE_VIDEOS.slice(0, 2);
+  // Demo clips fetched from Supabase public.videos for this bundle
+  const demoClips = videos.slice(0, 2);
 
   const handleMockDownload = () => {
     addToast(`📥 Download Started: "${bundle.title}" (1080p 9:16 MP4 Archive). Check your downloads folder.`, 'success');
@@ -67,7 +166,7 @@ export default function BundleDetailsPage() {
             {demoClips.map((demo, idx) => (
               <div
                 key={demo.id || idx}
-                onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl, duration: demo.duration })}
+                onClick={() => openVideoPreview({ title: demo.title,videoUrl: demo.video_url, duration: demo.duration })}
                 className="group relative bg-slate-900 rounded-3xl border border-slate-200 hover:border-brand-400 overflow-hidden shadow-xl cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
                 {/* 9:16 Aspect Reel Box */}

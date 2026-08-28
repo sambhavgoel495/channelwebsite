@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { MOCK_BUNDLES } from '@/data/mockData';
 import { 
@@ -13,14 +13,38 @@ import {
   Lock,
   Sparkles,
   ShieldCheck,
-  Video
+  Video,
+  Loader2,
+  AlertCircle,
+  RefreshCw
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function MyLibraryPage() {
-  const { getPurchasedBundles, openVideoPreview, addToast, hasPurchased, openQuickBuy } = useAuth();
+  const { 
+    isLoggedIn, 
+    authLoading, 
+    purchasesLoading, 
+    purchasesError, 
+    getPurchasedBundles, 
+    openVideoPreview, 
+    addToast, 
+    hasPurchased, 
+    openQuickBuy,
+    refetchPurchases 
+  } = useAuth();
+  
+  const router = useRouter();
   const purchasedBundles = getPurchasedBundles();
   const unpurchasedBundles = MOCK_BUNDLES.filter((b) => !hasPurchased(b.id));
+
+  // 1. LOGIN MUST BE REQUIRED FOR MY LIBRARY
+  useEffect(() => {
+    if (!authLoading && !isLoggedIn) {
+      router.push('/login?redirectTo=/my-library');
+    }
+  }, [authLoading, isLoggedIn, router]);
 
   const handleMockDownload = (bundleTitle: string) => {
     addToast(`📥 Download Started: "${bundleTitle}" (.zip archive). Check your downloads.`, 'success');
@@ -29,6 +53,26 @@ export default function MyLibraryPage() {
   const handleMockDriveAccess = (bundleTitle: string) => {
     addToast(`🔗 Opening Google Drive folder for "${bundleTitle}"...`, 'info');
   };
+
+  // 2. LOADING STATE
+  if (authLoading || (isLoggedIn && purchasesLoading)) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4 px-4">
+        <div className="w-16 h-16 rounded-full bg-orange-100 border border-orange-200 flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-brand-500 animate-spin" />
+        </div>
+        <div className="text-center space-y-1">
+          <h3 className="text-base font-extrabold text-slate-900">Loading Your Library...</h3>
+          <p className="text-xs text-slate-500 font-medium">Synchronizing your purchased video bundles from Supabase</p>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. NOT LOGGED IN REDIRECT GUARD
+  if (!isLoggedIn) {
+    return null;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 pb-24">
@@ -55,29 +99,45 @@ export default function MyLibraryPage() {
         )}
       </div>
 
-      {/* Purchased Bundles Section */}
+      {/* DATABASE ERROR STATE */}
+      {purchasesError && (
+        <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 text-rose-800">
+          <div className="flex items-center space-x-3 text-xs font-bold">
+            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+            <span>Failed to load purchases from database: {purchasesError}</span>
+          </div>
+          <button
+            onClick={() => refetchPurchases()}
+            className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl flex items-center space-x-2 shadow-sm shrink-0"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Retry Loading</span>
+          </button>
+        </div>
+      )}
+
+      {/* 4. EMPTY LIBRARY FOR USERS WITH NO PURCHASES */}
       {purchasedBundles.length === 0 ? (
-        /* Empty State */
         <div className="py-20 px-4 text-center max-w-lg mx-auto bg-white rounded-3xl border border-slate-200 space-y-6 shadow-xl">
-          <div className="w-20 h-20 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto text-slate-400">
+          <div className="w-20 h-20 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center mx-auto text-brand-500">
             <Library className="w-10 h-10 stroke-[1.5]" />
           </div>
           <div className="space-y-2">
-            <h2 className="text-2xl font-black text-slate-900">Your library is empty</h2>
+            <h2 className="text-2xl font-black text-slate-900">Your Library is Empty</h2>
             <p className="text-xs text-slate-600 font-medium leading-relaxed">
-              You haven&apos;t purchased any video bundles yet. Explore our curated toddler video packs and build your creator content collection today!
+              You haven&apos;t purchased any bundles yet. Explore our high-retention video packs and unlock instant 1080p MP4 downloads today!
             </p>
           </div>
           <Link
             href="/bundles"
             className="inline-flex items-center space-x-2 px-8 py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white font-black rounded-2xl shadow-xl orange-glow transition-transform hover:scale-105 text-xs"
           >
-            <span>Explore Video Bundles</span>
+            <span>Browse Bundles</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       ) : (
-        /* Purchased Bundles Showcase */
+        /* PURCHASED BUNDLES SHOWCASE */
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-black text-slate-900 flex items-center space-x-2">
@@ -182,7 +242,7 @@ export default function MyLibraryPage() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl font-black text-slate-900">Expand Your Content Collection</h2>
-              <p className="text-xs text-slate-600 font-medium">More 9:16 vertical toddler packs ready for instant purchase.</p>
+              <p className="text-xs text-slate-600 font-medium">More 9:16 vertical video packs ready for instant purchase.</p>
             </div>
             <Link
               href="/bundles"
