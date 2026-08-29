@@ -202,27 +202,19 @@ export default function MyLibraryPage() {
                   </div>
 
                   {/* Access CTAs */}
-                  <div className="space-y-2 pt-2 border-t border-slate-100">
-                    <button
-                      onClick={() => handleMockDownload(bundle.title)}
-                      className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black rounded-xl flex items-center justify-center space-x-2 transition-all shadow-md"
-                    >
-                      <FolderDown className="w-4 h-4" />
-                      <span>Download All Files (.zip)</span>
-                    </button>
-
+                  <div className="pt-2 border-t border-slate-100">
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => handleMockDriveAccess(bundle.title)}
-                        className="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11px] font-extrabold rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition-colors"
+                        className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
                       >
-                        <ExternalLink className="w-3.5 h-3.5 text-brand-500" />
+                        <ExternalLink className="w-3.5 h-3.5 text-white" />
                         <span>Google Drive</span>
                       </button>
 
                       <button
                         onClick={() => openVideoPreview({ title: `${bundle.title} (Main Preview)`, videoUrl: bundle.previewVideoUrl })}
-                        className="py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11px] font-extrabold rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition-colors"
+                        className="py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold rounded-xl border border-slate-200 flex items-center justify-center space-x-1.5 transition-colors shadow-sm"
                       >
                         <Play className="w-3.5 h-3.5 text-brand-500" />
                         <span>Preview Pack</span>
