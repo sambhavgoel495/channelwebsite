@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MOCK_BUNDLES, SAMPLE_VIDEOS } from '@/data/mockData';
+import { Bundle } from '@/types';
+import { supabase } from '@/lib/supabase';
 import { BundleCard } from '@/components/BundleCard';
 import { CategoryFilter } from '@/components/CategoryFilter';
 import { useAuth } from '@/context/AuthContext';
@@ -14,16 +16,66 @@ import {
   TrendingUp, 
   ShieldCheck, 
   Zap,
-  HelpCircle
+  HelpCircle,
+  ChevronDown
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState('All Available Bundles');
+  const [openFaqs, setOpenFaqs] = useState<number[]>([]);
+  const [bundles, setBundles] = useState<Bundle[]>(MOCK_BUNDLES);
   const { openVideoPreview } = useAuth();
 
+  useEffect(() => {
+    supabase
+      .from('bundles')
+      .select('*')
+      .order('id', { ascending: true })
+      .then(({ data, error }) => {
+        if (!error && data && data.length > 0) {
+          const formatted = data.map((b) => {
+            const mock = MOCK_BUNDLES.find((m) => m.id === String(b.id));
+            return {
+              ...(mock || {}),
+              id: String(b.id),
+              title: b.title,
+              slug: b.slug,
+              tagline: b.tagline || mock?.tagline || '',
+              description: b.description || mock?.description || '',
+              price: Number(b.price),
+              originalPrice: Number(b.original_price || mock?.originalPrice || 299),
+              videoCount: b.video_count || mock?.videoCount || 0,
+              category: b.category || mock?.category || 'Trending',
+              categoryBadge: b.category_badge || mock?.categoryBadge || '',
+              formatBadge: b.format_badge || mock?.formatBadge || '',
+              quality: b.quality || mock?.quality || '1080p 9:16 Vertical',
+              thumbnail: b.thumbnail || mock?.thumbnail || '',
+              previewVideoUrl: b.preview_video_url || mock?.previewVideoUrl || '',
+              isPopular: b.is_popular ?? mock?.isPopular ?? false,
+              isTrending: b.is_trending ?? mock?.isTrending ?? false,
+              rating: Number(b.rating || mock?.rating || 5.0),
+              reviewsCount: Number(b.reviews_count || mock?.reviewsCount || 0),
+              lockedVideosCount: b.locked_videos_count || mock?.lockedVideosCount || 0,
+              freeDemos: mock?.freeDemos || [],
+              sampleVideos: mock?.sampleVideos || [],
+              whatsInside: b.whats_inside || mock?.whatsInside || [],
+            } as Bundle;
+          });
+          setBundles(formatted);
+        }
+      });
+  }, []);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqs((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+
   const filteredBundles = (selectedCategory === 'All Available Bundles' || selectedCategory === 'All Videos')
-    ? MOCK_BUNDLES
-    : MOCK_BUNDLES.filter(b => b.category === 'Trending' || b.isTrending || b.isPopular);
+    ? bundles
+    : bundles.filter(b => b.category === 'Trending' || b.isTrending || b.isPopular);
 
   const faqs = [
     {
@@ -179,18 +231,54 @@ export default function HomePage() {
           </h2>
         </div>
 
-        <div className="space-y-4 pt-2">
-          {faqs.map((faq, i) => (
-            <div key={i} className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
-              <h4 className="text-sm font-extrabold text-slate-900 flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-brand-500 shrink-0" />
-                <span>{faq.q}</span>
-              </h4>
-              <p className="text-xs text-slate-600 pl-6 leading-relaxed font-medium">
-                {faq.a}
-              </p>
-            </div>
-          ))}
+        <div className="space-y-3 pt-2">
+          {faqs.map((faq, i) => {
+            const isOpen = openFaqs.includes(i);
+            return (
+              <div 
+                key={i} 
+                className={`rounded-2xl bg-white border transition-colors duration-200 shadow-sm overflow-hidden ${
+                  isOpen ? 'border-brand-300 ring-1 ring-brand-200/50' : 'border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(i)}
+                  aria-expanded={isOpen}
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 transition-colors select-none focus:outline-none group cursor-pointer"
+                >
+                  <h4 className="text-sm font-extrabold text-slate-900 flex items-center space-x-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-brand-500 shrink-0" />
+                    <span className="group-hover:text-brand-600 transition-colors">{faq.q}</span>
+                  </h4>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    isOpen ? 'bg-orange-100 text-brand-600 rotate-180' : 'bg-slate-100 text-slate-500 group-hover:bg-slate-200'
+                  }`}>
+                    <ChevronDown className="w-4 h-4 transition-transform" />
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 pt-1">
+                        <p className="text-xs text-slate-600 pl-6 leading-relaxed font-medium border-t border-slate-100 pt-3">
+                          {faq.a}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </section>
 

@@ -22,7 +22,7 @@ export default function AdminDashboardPage() {
   // Form states for Add New Bundle
   const [newBundleName, setNewBundleName] = useState('');
   const [newDescription, setNewDescription] = useState('');
-  const [newPrice, setNewPrice] = useState('99');
+  const [newPrice, setNewPrice] = useState('49');
   const [newVideoCount, setNewVideoCount] = useState('50');
   const [newCategory, setNewCategory] = useState('Comedy');
   const [newThumbnail, setNewThumbnail] = useState('https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80');
@@ -252,7 +252,7 @@ export default function AdminDashboardPage() {
                       required
                       value={newPrice}
                       onChange={(e) => setNewPrice(e.target.value)}
-                      placeholder="99"
+                      placeholder="49"
                       className="w-full p-3 bg-slate-50 text-slate-900 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-500 font-medium"
                     />
                   </div>

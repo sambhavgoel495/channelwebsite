@@ -226,7 +226,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const purchaseBundle = async (bundleId: string, amount: number = 99): Promise<boolean> => {
+  const purchaseBundle = async (bundleId: string, amount: number = 49): Promise<boolean> => {
     if (!user) {
       addToast('Please log in to complete your purchase.', 'info');
       return false;

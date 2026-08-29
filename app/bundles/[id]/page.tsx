@@ -65,7 +65,15 @@ export default function BundleDetailsPage() {
       return;
     }
 
-    setBundle(bundleData);
+    const formatted = {
+      ...bundleData,
+      originalPrice: bundleData.original_price || bundleData.originalPrice || 299,
+      videoCount: bundleData.video_count || bundleData.videoCount || 0,
+      categoryBadge: bundleData.category_badge || bundleData.categoryBadge || '',
+      formatBadge: bundleData.format_badge || bundleData.formatBadge || '',
+      previewVideoUrl: bundleData.preview_video_url || bundleData.previewVideoUrl || '',
+    };
+    setBundle(formatted);
 
     // Fetch videos belonging to this bundle from public.videos
     const { data: videoData, error: videoError } = await supabase
@@ -265,9 +273,11 @@ export default function BundleDetailsPage() {
                   {bundle.originalPrice && (
                     <span className="text-sm text-slate-400 line-through">₹{bundle.originalPrice}</span>
                   )}
-                  <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-emerald-100 text-emerald-700 rounded-md border border-emerald-200">
-                    67% OFF
-                  </span>
+                  {bundle.originalPrice && bundle.price && (
+                    <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-emerald-100 text-emerald-700 rounded-md border border-emerald-200">
+                      {Math.round(((bundle.originalPrice - bundle.price) / bundle.originalPrice) * 100)}% OFF
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

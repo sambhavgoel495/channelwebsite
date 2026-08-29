@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
         .eq('id', String(bundleId))
         .maybeSingle();
 
-      const finalAmount = bData?.price || 99;
+      const finalAmount = bData?.price ?? 49;
 
       const { error: insertError } = await supabaseAdmin.from('purchases').insert({
         user_id: user.id,
