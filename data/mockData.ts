@@ -149,7 +149,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     categoryBadge: 'TALK & AUDIO',
     formatBadge: '9:16 VERTICAL HD',
     quality: '1080p 9:16 Vertical',
-    thumbnail: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=800&q=80',
+    thumbnail: '/ai_girls_dancing_bundle.png',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-playing-with-colorful-blocks-42646-large.mp4',
     isPopular: false,
     rating: 4.9,
