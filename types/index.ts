@@ -33,6 +33,7 @@ export interface Bundle {
   lockedVideosCount: number;
   sampleVideos: VideoItem[];
   whatsInside: string[];
+  driveUrl?: string;
 }
 
 export interface Category {

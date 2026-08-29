@@ -93,7 +93,8 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Instant Download & Drive Link Access',
       'Commercial License for Content Creators',
       'Organized into Clean Scene Directories'
-    ]
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV',
   },
   {
     id: '2',

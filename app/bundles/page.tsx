@@ -54,6 +54,7 @@ export default function BundlesPage() {
       reviewsCount: bundle.reviews_count || 0,
       lockedVideosCount: bundle.locked_videos_count || 0,
       whatsInside: bundle.whats_inside || [],
+      driveUrl: bundle.drive_url || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : ''),
       freeDemos: [],
       sampleVideos: []
     }));

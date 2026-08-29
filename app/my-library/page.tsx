@@ -204,13 +204,22 @@ export default function MyLibraryPage() {
                   {/* Access CTAs */}
                   <div className="pt-2 border-t border-slate-100">
                     <div className="grid grid-cols-2 gap-2">
-                      <button
-                        onClick={() => handleMockDriveAccess(bundle.title)}
+                      <a
+                        href={bundle.driveUrl || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : '#')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          const link = bundle.driveUrl || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : null);
+                          if (!link) {
+                            e.preventDefault();
+                            handleMockDriveAccess(bundle.title);
+                          }
+                        }}
                         className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
                       >
                         <ExternalLink className="w-3.5 h-3.5 text-white" />
                         <span>Google Drive</span>
-                      </button>
+                      </a>
 
                       <button
                         onClick={() => openVideoPreview({ title: `${bundle.title} (Main Preview)`, videoUrl: bundle.previewVideoUrl })}
