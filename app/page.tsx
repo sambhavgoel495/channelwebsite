@@ -60,7 +60,13 @@ export default function HomePage() {
               freeDemos: mock?.freeDemos || [],
               sampleVideos: mock?.sampleVideos || [],
               whatsInside: b.whats_inside || mock?.whatsInside || [],
-              driveUrl: b.drive_url || mock?.driveUrl || (String(b.id) === '2' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : ''),
+              driveUrl: b.drive_url || mock?.driveUrl || (
+                String(b.id) === '1'
+                  ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
+                  : String(b.id) === '2'
+                    ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
+                    : ''
+              ),
             } as Bundle;
           });
           setBundles(formatted);
