@@ -93,8 +93,7 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Instant Download & Drive Link Access',
       'Commercial License for Content Creators',
       'Organized into Clean Scene Directories'
-    ],
-    driveUrl: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV',
+    ]
   },
   {
     id: '2',
@@ -125,7 +124,7 @@ export const MOCK_BUNDLES: Bundle[] = [
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-toddler-smiling-and-playing-outdoors-42861-large.mp4',
       format: '9:16 Vertical HD',
       isLocked: true,
-      category: 'Cute Reactions'
+      category: 'Trending'
     })),
     whatsInside: [
       '75 Hand-Picked Reaction Clips',
@@ -133,7 +132,8 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Commercial Usage Included',
       'Instant One-Click Google Drive Sync',
       'Sorted by Mood (Shock, Joy, Confusion)'
-    ]
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV',
   },
   {
     id: '3',

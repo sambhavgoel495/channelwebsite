@@ -205,11 +205,11 @@ export default function MyLibraryPage() {
                   <div className="pt-2 border-t border-slate-100">
                     <div className="grid grid-cols-2 gap-2">
                       <a
-                        href={bundle.driveUrl || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : '#')}
+                        href={bundle.driveUrl || (String(bundle.id) === '2' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : '#')}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => {
-                          const link = bundle.driveUrl || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : null);
+                          const link = bundle.driveUrl || (String(bundle.id) === '2' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : null);
                           if (!link) {
                             e.preventDefault();
                             handleMockDriveAccess(bundle.title);

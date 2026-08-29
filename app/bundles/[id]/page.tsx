@@ -73,7 +73,7 @@ export default function BundleDetailsPage() {
       categoryBadge: bundleData.category_badge || bundleData.categoryBadge || '',
       formatBadge: bundleData.format_badge || bundleData.formatBadge || '',
       previewVideoUrl: bundleData.preview_video_url || bundleData.previewVideoUrl || '',
-      driveUrl: bundleData.drive_url || bundleData.driveUrl || (String(bundleData.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : ''),
+      driveUrl: bundleData.drive_url || bundleData.driveUrl || (String(bundleData.id) === '2' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : ''),
     };
     setBundle(formatted);
 
@@ -292,8 +292,8 @@ export default function BundleDetailsPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <a
-                    href={bundle.driveUrl || (String(bundle.id) === '1' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : '#')}
-                    target={bundle.driveUrl || String(bundle.id) === '1' ? '_blank' : undefined}
+                    href={bundle.driveUrl || (String(bundle.id) === '2' ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' : '#')}
+                    target={bundle.driveUrl || String(bundle.id) === '2' ? '_blank' : undefined}
                     rel="noopener noreferrer"
                     className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
                   >
