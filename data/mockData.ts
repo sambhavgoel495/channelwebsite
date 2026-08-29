@@ -7,7 +7,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'Roblox Viral Parkour Reel 🎮',
     duration: '0:15',
     thumbnail: '/roblox_reels_bundle.jpg',
-    videoUrl: '/roblox_demo_video_1.mp4',
+    videoUrl: '/robloxdemo1.mp4',
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '2.5M'
@@ -17,7 +17,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'Roblox Speed Challenge 🚀',
     duration: '0:18',
     thumbnail: '/roblox_reels_bundle.jpg',
-    videoUrl: '/roblox_demo_video_1.mp4',
+    videoUrl: '/robloxdemo2.mp4',
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '3.8M'
@@ -27,7 +27,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'BeamNG Car Crash Jump Test 💥',
     duration: '0:16',
     thumbnail: '/car_crash_bundle.jpg',
-    videoUrl: '/car_crash_demo_1.mp4',
+    videoUrl: '/carcrashdemo1.mp4',
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '4.2M'
@@ -37,7 +37,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'Highway Supercar Crash Reel 🚘',
     duration: '0:18',
     thumbnail: '/car_crash_bundle.jpg',
-    videoUrl: '/car_crash_demo_1.mp4',
+    videoUrl: '/carcrashdemo2.mp4',
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '5.1M'
@@ -64,7 +64,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     formatBadge: '9:16 VERTICAL HD',
     quality: '1080p 9:16 Vertical',
     thumbnail: '/roblox_reels_bundle.jpg',
-    previewVideoUrl: '/roblox_demo_video_1.mp4',
+    previewVideoUrl: '/robloxdemo1.mp4',
     isPopular: true,
     isTrending: true,
     rating: 5.0,
@@ -110,7 +110,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     formatBadge: '9:16 VERTICAL HD',
     quality: '1080p 9:16 Vertical',
     thumbnail: '/car_crash_bundle.jpg',
-    previewVideoUrl: '/car_crash_demo_1.mp4',
+    previewVideoUrl: '/carcrashdemo1.mp4',
     isPopular: true,
     isTrending: true,
     rating: 4.9,

@@ -19,6 +19,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
+import { MOCK_BUNDLES } from '@/data/mockData';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -145,7 +146,8 @@ export default function BundleDetailsPage() {
   const isPurchased = hasPurchased(bundle.id);
 
   // Demo clips fetched from Supabase public.videos for this bundle
-  const demoClips = videos.slice(0, 2);
+  const mockFallback = MOCK_BUNDLES.find((b) => String(b.id) === String(bundle.id));
+  const demoClips = videos.length > 0 ? videos.slice(0, 2) : (mockFallback?.freeDemos || []);
 
   const handleMockDownload = () => {
     addToast(`📥 Download Started: "${bundle.title}" (1080p 9:16 MP4 Archive). Check your downloads folder.`, 'success');
@@ -182,7 +184,7 @@ export default function BundleDetailsPage() {
             {demoClips.map((demo, idx) => (
               <div
                 key={demo.id || idx}
-                onClick={() => openVideoPreview({ title: demo.title,videoUrl: demo.video_url, duration: demo.duration })}
+                onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.video_url || demo.videoUrl, duration: demo.duration })}
                 className="group relative bg-slate-900 rounded-3xl border border-slate-200 hover:border-brand-400 overflow-hidden shadow-xl cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
                 {/* 9:16 Aspect Reel Box */}
