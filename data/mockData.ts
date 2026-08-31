@@ -41,6 +41,26 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '5.1M'
+  },
+  {
+    id: 'demo-7',
+    title: 'Stickman Epic Action Reel 🥷',
+    duration: '0:18',
+    thumbnail: '/stickman_content_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Action',
+    viewsCount: '6.4M'
+  },
+  {
+    id: 'demo-8',
+    title: 'Stickman Stunts & Battles ⚔️',
+    duration: '0:22',
+    thumbnail: '/stickman_content_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Action',
+    viewsCount: '8.1M'
   }
 ];
 
@@ -176,41 +196,41 @@ export const MOCK_BUNDLES: Bundle[] = [
   },
   {
     id: '4',
-    title: 'Viral Toddler Collection',
-    slug: 'viral-toddler-collection',
-    tagline: 'Top performing high-retention toddler moments',
-    description: 'A mixed collection of entertaining toddler moments proven to generate high watch time and engagement.',
-    price: 149,
-    originalPrice: 499,
-    videoCount: 100,
-    category: 'Trending',
-    categoryBadge: 'VIRAL BESTSELLER',
+    title: '1000+ Stickman Content Bundle',
+    slug: 'stickman-content-bundle',
+    tagline: '1,000+ High Quality Viral Stickman Videos',
+    description: 'Massive collection of entertaining Stickman action clips made specifically for short-form content creators.',
+    price: 39,
+    originalPrice: 399,
+    videoCount: 1000,
+    category: 'Action',
+    categoryBadge: 'STICKMAN ACTION',
     formatBadge: '9:16 VERTICAL HD',
     quality: '1080p 9:16 Vertical',
     thumbnail: '/stickman_content_bundle.jpg',
-    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-playing-with-a-stuffed-animal-42358-large.mp4',
+    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
     isPopular: true,
     isTrending: true,
     rating: 5.0,
     reviewsCount: 512,
-    freeDemos: [SAMPLE_VIDEOS[2], SAMPLE_VIDEOS[3]],
-    lockedVideosCount: 98,
+    freeDemos: [SAMPLE_VIDEOS[4], SAMPLE_VIDEOS[5]],
+    lockedVideosCount: 998,
     sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
-      id: `vt-${i + 1}`,
-      title: `Viral Clip #${i + 1}`,
+      id: `sm-${i + 1}`,
+      title: `Stickman Action Clip #${i + 1}`,
       duration: `0:${10 + (i % 15)}`,
-      thumbnail: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=400&q=80',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-playing-with-a-stuffed-animal-42358-large.mp4',
+      thumbnail: '/stickman_content_bundle.jpg',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
       format: '9:16 Vertical HD',
       isLocked: true,
-      category: 'Trending'
+      category: 'Action'
     })),
     whatsInside: [
-      '100 Ultimate Viral Toddler Clips',
-      'Curated for High Retention Algorithms',
-      '9:16 1080p Clean MP4 Files',
-      'Includes Music-Ready Silent & Audio Tracks',
-      'Unrestricted Social Media Monetization'
+      '1,000+ Short-Form Stickman Videos',
+      'Designed for Shorts, Reels & TikTok',
+      'High-Quality Stickman Animations & Action Clips',
+      'No Watermarks or Logos',
+      'Organized Google Drive Library'
     ]
   }
 ];

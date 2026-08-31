@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { MOCK_BUNDLES } from '@/data/mockData';
 import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
 import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescription';
+import { StickmanBundleDescription } from '@/components/StickmanBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -359,6 +360,11 @@ export default function BundleDetailsPage() {
       {/* Rich Car Crash Sales Description (Rendered for Car Crash Bundle id: 2) */}
       {String(bundle.id) === '2' && (
         <CarCrashBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Stickman Sales Description (Rendered for Stickman Bundle id: 4) */}
+      {String(bundle.id) === '4' && (
+        <StickmanBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}

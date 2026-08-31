@@ -19,7 +19,7 @@ export interface Bundle {
   price: number; // in INR ₹
   originalPrice: number;
   videoCount: number;
-  category: 'Comedy' | 'Cute Reactions' | 'Conversations' | 'Funny Moments' | 'Trending';
+  category: 'Comedy' | 'Cute Reactions' | 'Conversations' | 'Funny Moments' | 'Trending' | 'Action' | string;
   categoryBadge: string;
   formatBadge: string;
   quality: string; // e.g. "1080p 9:16 Vertical"
