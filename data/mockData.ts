@@ -61,12 +61,32 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Action',
     viewsCount: '8.1M'
+  },
+  {
+    id: 'demo-9',
+    title: 'Oddly Satisfying Kinetic Sand & Crushing 🧼',
+    duration: '0:25',
+    thumbnail: '/satisfying_reels_bundle.jpg',
+    videoUrl: '/satisfyingdemo1.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '7.8M'
+  },
+  {
+    id: 'demo-10',
+    title: 'Mesmerizing Liquid & Cleaning Reel ✨',
+    duration: '0:30',
+    thumbnail: '/satisfying_reels_bundle.jpg',
+    videoUrl: '/satisfyingdemo2.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '9.2M'
   }
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 4 },
-  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 2 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 5 },
+  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 3 },
   { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
 ];
 
@@ -275,6 +295,45 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Full Commercial Rights & Lifetime Access'
     ],
     driveUrl: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
+  },
+  {
+    id: '6',
+    title: '1000+ Satisfying Reels Content Bundle',
+    slug: 'satisfying-reels-content-bundle',
+    tagline: '1,000+ High Quality Visually Satisfying Reels',
+    description: 'A massive collection of addictive, visually satisfying videos made specifically for short-form content creators.',
+    price: 39,
+    originalPrice: 299,
+    videoCount: 1000,
+    category: 'Trending',
+    categoryBadge: 'SATISFYING REELS',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/satisfying_reels_bundle.jpg',
+    previewVideoUrl: '/satisfyingdemo1.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 620,
+    freeDemos: [SAMPLE_VIDEOS[6], SAMPLE_VIDEOS[7]],
+    lockedVideosCount: 998,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `sr-${i + 1}`,
+      title: `Satisfying Clip #${i + 1}`,
+      duration: `0:${15 + (i % 20)}`,
+      thumbnail: '/satisfying_reels_bundle.jpg',
+      videoUrl: '/satisfyingdemo1.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Trending'
+    })),
+    whatsInside: [
+      '1,000+ Short-Form Satisfying Videos',
+      'Designed for Shorts, Reels & TikTok',
+      'High-Quality Oddly Satisfying Clips',
+      'No Watermarks or Logos',
+      'Organized Google Drive Library'
+    ]
   }
 ];
 

@@ -24,6 +24,7 @@ import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
 import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescription';
 import { StickmanBundleDescription } from '@/components/StickmanBundleDescription';
 import { ComboBundleDescription } from '@/components/ComboBundleDescription';
+import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -431,6 +432,11 @@ export default function BundleDetailsPage() {
       {/* Rich Combo Sales Description (Rendered for Combo Pack id: 5) */}
       {(String(bundle.id) === '5' || bundle.category === 'Combo') && (
         <ComboBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Satisfying Sales Description (Rendered for Satisfying Bundle id: 6) */}
+      {String(bundle.id) === '6' && (
+        <SatisfyingBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}
