@@ -21,6 +21,7 @@ import {
 import Link from 'next/link';
 import { MOCK_BUNDLES } from '@/data/mockData';
 import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
+import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -353,6 +354,11 @@ export default function BundleDetailsPage() {
       {/* Rich Roblox Sales Description (Rendered for Roblox Reels Bundle id: 1) */}
       {String(bundle.id) === '1' && (
         <RobloxBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Car Crash Sales Description (Rendered for Car Crash Bundle id: 2) */}
+      {String(bundle.id) === '2' && (
+        <CarCrashBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}
