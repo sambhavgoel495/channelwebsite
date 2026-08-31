@@ -47,7 +47,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'Stickman Epic Action Reel 🥷',
     duration: '0:18',
     thumbnail: '/stickman_content_bundle.jpg',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
+    videoUrl: '/stickmandemo1.mp4',
     format: '9:16 Vertical HD',
     category: 'Action',
     viewsCount: '6.4M'
@@ -57,7 +57,7 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     title: 'Stickman Stunts & Battles ⚔️',
     duration: '0:22',
     thumbnail: '/stickman_content_bundle.jpg',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-game-animation-of-a-robot-character-42991-large.mp4',
+    videoUrl: '/stickmandemo2.mp4',
     format: '9:16 Vertical HD',
     category: 'Action',
     viewsCount: '8.1M'
