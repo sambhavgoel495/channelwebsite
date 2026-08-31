@@ -16,6 +16,7 @@ import {
   TrendingUp, 
   ShieldCheck, 
   Zap,
+  Flame,
   HelpCircle,
   ChevronDown
 } from 'lucide-react';
@@ -81,10 +82,10 @@ export default function HomePage() {
   };
 
   const filteredBundles = (selectedCategory === 'All Available Bundles' || selectedCategory === 'All Videos')
-    ? bundles
-    : (selectedCategory === 'Combo Bundles' || selectedCategory.includes('Combo'))
+    ? bundles.filter(b => b.category !== 'Combo' && String(b.id) !== '5')
+    : (selectedCategory === 'Combos' || selectedCategory === 'Combo Bundles' || selectedCategory.includes('Combo'))
     ? bundles.filter(b => b.category === 'Combo' || String(b.id) === '5')
-    : bundles.filter(b => b.category === 'Trending' || b.isTrending || b.isPopular);
+    : bundles.filter(b => (b.category === 'Trending' || b.isTrending || b.isPopular) && b.category !== 'Combo' && String(b.id) !== '5');
 
   const faqs = [
     {
@@ -121,6 +122,112 @@ export default function HomePage() {
           {filteredBundles.map((bundle) => (
             <BundleCard key={bundle.id} bundle={bundle} />
           ))}
+        </div>
+      </section>
+
+      {/* 1.5 DEDICATED COMBOS SECTION BLOCK */}
+      <section id="combos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-950 to-brand-950 text-white border border-slate-800 shadow-2xl relative overflow-hidden space-y-6">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div className="space-y-1">
+              <div className="inline-flex items-center space-x-2 px-3 py-0.5 bg-amber-500/20 border border-amber-400/30 rounded-full text-amber-300 text-xs font-black uppercase tracking-wider">
+                <Flame className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                <span>EXCLUSIVE MEGA SAVER</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                🔥 COMBOS
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-400 font-medium">
+                Get all 4 viral video bundles in one mega pack for ultimate savings.
+              </p>
+            </div>
+
+            <span className="px-4 py-2 bg-gradient-to-r from-brand-500 to-orange-500 text-white text-xs font-black rounded-2xl shadow-lg border border-orange-400/30 self-start md:self-auto">
+              Save ₹1,350 Today (90% OFF)
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            {/* Left 4-in-1 Collage Preview */}
+            <div className="lg:col-span-4">
+              <Link href="/bundles/5" className="group relative aspect-[9/16] max-w-xs mx-auto rounded-2xl overflow-hidden bg-slate-950 block border border-slate-700 shadow-2xl">
+                <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-0.5 p-0.5 group-hover:scale-105 transition-transform duration-500">
+                  <img src="/roblox_reels_bundle.jpg" alt="Roblox" className="w-full h-full object-cover rounded-tl-lg" />
+                  <img src="/car_crash_bundle.jpg" alt="Car Crash" className="w-full h-full object-cover rounded-tr-lg" />
+                  <img src="/ai_girls_dancing_bundle.png" alt="AI Girls" className="w-full h-full object-cover rounded-bl-lg" />
+                  <img src="/stickman_content_bundle.jpg" alt="Stickman" className="w-full h-full object-cover rounded-br-lg" />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <span className="px-2.5 py-1 text-[10px] font-black uppercase bg-brand-500 text-white rounded-lg">
+                    4-IN-1 MEGA COMBO
+                  </span>
+                  <span className="px-2 py-0.5 text-[9px] font-bold bg-slate-900/90 text-slate-200 rounded">
+                    15,000+ CLIPS
+                  </span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Right Combo Info & Action */}
+            <div className="lg:col-span-8 space-y-4">
+              <div className="space-y-2">
+                <span className="px-2.5 py-0.5 text-[10px] font-black uppercase bg-orange-500/20 text-orange-400 rounded border border-orange-500/30">
+                  BESTSELLER COMBO
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black text-white">
+                  🔥 Ultimate 4-in-1 Creator Combo Pack
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+                  Unlock lifetime access to Roblox (3,000+), BeamNG Car Crash (8,000+), AI Girls Dancing (3,000+), and Stickman Action (1,000+) bundles in one massive combo!
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-center">
+                  <span className="text-[10px] text-slate-400 font-bold block">ROBLOX</span>
+                  <span className="text-xs font-black text-white">3,000+ Clips</span>
+                </div>
+                <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-center">
+                  <span className="text-[10px] text-slate-400 font-bold block">CAR CRASH</span>
+                  <span className="text-xs font-black text-white">8,000+ Clips</span>
+                </div>
+                <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-center">
+                  <span className="text-[10px] text-slate-400 font-bold block">AI DANCING</span>
+                  <span className="text-xs font-black text-white">3,000+ Clips</span>
+                </div>
+                <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700 text-center">
+                  <span className="text-[10px] text-slate-400 font-bold block">STICKMAN</span>
+                  <span className="text-xs font-black text-white">1,000+ Clips</span>
+                </div>
+              </div>
+
+              <div className="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-slate-800">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">Mega Combo Price</span>
+                  <div className="flex items-baseline space-x-2 mt-0.5">
+                    <span className="text-3xl font-black text-white">₹149</span>
+                    <span className="text-sm text-slate-500 line-through">₹1,499</span>
+                    <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30">
+                      90% OFF
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-3">
+                  <Link
+                    href="/bundles/5"
+                    className="px-6 py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-2xl shadow-xl orange-glow transition-all flex items-center justify-center space-x-2"
+                  >
+                    <span>View Combo Details</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

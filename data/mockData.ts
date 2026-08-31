@@ -65,9 +65,9 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 5 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 4 },
   { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 2 },
-  { id: 'Combo', name: 'Combo Bundles', iconName: 'Flame', count: 1 },
+  { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
 ];
 
 export const MOCK_BUNDLES: Bundle[] = [
