@@ -187,7 +187,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     categoryBadge: 'VIRAL BESTSELLER',
     formatBadge: '9:16 VERTICAL HD',
     quality: '1080p 9:16 Vertical',
-    thumbnail: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80',
+    thumbnail: '/stickman_content_bundle.jpg',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-baby-playing-with-a-stuffed-animal-42358-large.mp4',
     isPopular: true,
     isTrending: true,
