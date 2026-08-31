@@ -232,7 +232,8 @@ export const MOCK_BUNDLES: Bundle[] = [
       'High-Quality Stickman Animations & Action Clips',
       'No Watermarks or Logos',
       'Organized Google Drive Library'
-    ]
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
   },
   {
     id: '5',

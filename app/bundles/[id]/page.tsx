@@ -367,9 +367,11 @@ export default function BundleDetailsPage() {
                         ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
                         : String(bundle.id) === '2'
                           ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
-                          : '#'
+                          : String(bundle.id) === '4'
+                            ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
+                            : '#'
                     )}
-                    target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' ? '_blank' : undefined}
+                    target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' ? '_blank' : undefined}
                     rel="noopener noreferrer"
                     className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
                   >

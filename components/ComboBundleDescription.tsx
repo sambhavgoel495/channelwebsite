@@ -31,7 +31,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
     { title: '🎮 3,000+ Roblox Reels Bundle', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB' },
     { title: '🚗 8,000+ Car Crash Bundle', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' },
     { title: '💃 3,000+ AI Girls Dancing Reels', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB' },
-    { title: '🥷 1,000+ Stickman Action Bundle', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' },
+    { title: '🥷 1,000+ Stickman Action Bundle', url: 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0' },
   ];
 
   return (
