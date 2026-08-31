@@ -142,7 +142,7 @@ export default function HomePage() {
 
           {/* 2 Featured Large Demo Video Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {SAMPLE_VIDEOS.slice(0, 2).map((demo) => (
+            {[SAMPLE_VIDEOS[0], SAMPLE_VIDEOS[2]].map((demo) => (
               <div
                 key={demo.id}
                 onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl, duration: demo.duration })}
