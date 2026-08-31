@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { MOCK_BUNDLES } from '@/data/mockData';
+import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -348,6 +349,11 @@ export default function BundleDetailsPage() {
         </div>
 
       </div>
+
+      {/* Rich Roblox Sales Description (Rendered for Roblox Reels Bundle id: 1) */}
+      {String(bundle.id) === '1' && (
+        <RobloxBundleDescription bundle={bundle} />
+      )}
 
       {/* What's Inside & Locked Grid Section */}
       <div className="space-y-6 pt-6 border-t border-slate-200">
