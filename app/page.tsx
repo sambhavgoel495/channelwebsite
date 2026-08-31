@@ -82,6 +82,8 @@ export default function HomePage() {
 
   const filteredBundles = (selectedCategory === 'All Available Bundles' || selectedCategory === 'All Videos')
     ? bundles
+    : (selectedCategory === 'Combo Bundles' || selectedCategory.includes('Combo'))
+    ? bundles.filter(b => b.category === 'Combo' || String(b.id) === '5')
     : bundles.filter(b => b.category === 'Trending' || b.isTrending || b.isPopular);
 
   const faqs = [

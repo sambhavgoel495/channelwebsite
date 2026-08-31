@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { MOCK_CATEGORIES } from '@/data/mockData';
-import { Grid, TrendingUp } from 'lucide-react';
+import { Grid, TrendingUp, Flame, Layers } from 'lucide-react';
 
 interface CategoryFilterProps {
   selectedCategory: string;
@@ -12,6 +12,8 @@ interface CategoryFilterProps {
 const categoryIcons: Record<string, React.ElementType> = {
   Grid,
   TrendingUp,
+  Flame,
+  Layers,
 };
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -26,7 +28,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
           const isSelected =
             selectedCategory === cat.name ||
             (selectedCategory === 'All Videos' && cat.id === 'all') ||
-            (selectedCategory === 'Trending' && cat.id === 'Trending');
+            (selectedCategory === 'Trending' && cat.id === 'Trending') ||
+            (selectedCategory === 'Combo' && cat.id === 'Combo');
 
           return (
             <button

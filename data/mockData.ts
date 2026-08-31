@@ -65,8 +65,9 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 4 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 5 },
   { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 2 },
+  { id: 'Combo', name: 'Combo Bundles', iconName: 'Flame', count: 1 },
 ];
 
 export const MOCK_BUNDLES: Bundle[] = [
@@ -232,6 +233,47 @@ export const MOCK_BUNDLES: Bundle[] = [
       'No Watermarks or Logos',
       'Organized Google Drive Library'
     ]
+  },
+  {
+    id: '5',
+    title: '🔥 Ultimate 4-in-1 Creator Combo Pack',
+    slug: 'ultimate-4-in-1-creator-combo-pack',
+    tagline: 'Get ALL 4 Mega Bundles (15,000+ Total Videos)',
+    description: 'Unlock lifetime access to Roblox (3,000+), BeamNG Car Crash (8,000+), AI Girls Dancing (3,000+), and Stickman Action (1,000+) bundles in one massive combo!',
+    price: 149,
+    originalPrice: 1499,
+    videoCount: 15000,
+    category: 'Combo',
+    categoryBadge: '🔥 4-IN-1 MEGA COMBO',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/roblox_reels_bundle.jpg',
+    previewVideoUrl: '/robloxdemo1.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 840,
+    freeDemos: [SAMPLE_VIDEOS[0], SAMPLE_VIDEOS[2]],
+    lockedVideosCount: 14990,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `combo-${i + 1}`,
+      title: `Combo Clip #${i + 1}`,
+      duration: `0:${10 + (i % 15)}`,
+      thumbnail: '/roblox_reels_bundle.jpg',
+      videoUrl: '/robloxdemo1.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Combo'
+    })),
+    whatsInside: [
+      '3,000+ Roblox Viral Video Clips',
+      '8,000+ BeamNG Car Crash Videos',
+      '3,000+ AI Girls Dancing Reels',
+      '1,000+ Stickman Action Videos',
+      'Instant Google Drive Access to All 4 Folders',
+      'Full Commercial Rights & Lifetime Access'
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
   }
 ];
 

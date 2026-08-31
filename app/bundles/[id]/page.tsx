@@ -23,6 +23,7 @@ import { MOCK_BUNDLES } from '@/data/mockData';
 import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
 import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescription';
 import { StickmanBundleDescription } from '@/components/StickmanBundleDescription';
+import { ComboBundleDescription } from '@/components/ComboBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -365,6 +366,11 @@ export default function BundleDetailsPage() {
       {/* Rich Stickman Sales Description (Rendered for Stickman Bundle id: 4) */}
       {String(bundle.id) === '4' && (
         <StickmanBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Combo Sales Description (Rendered for Combo Pack id: 5) */}
+      {(String(bundle.id) === '5' || bundle.category === 'Combo') && (
+        <ComboBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}

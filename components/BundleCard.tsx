@@ -34,11 +34,20 @@ export const BundleCard: React.FC<BundleCardProps> = ({ bundle }) => {
 
       {/* Image Poster (9:16 Aspect Box Container) */}
       <Link href={`/bundles/${bundle.id}`} prefetch={true} className="relative aspect-[9/16] w-full overflow-hidden bg-slate-900 block">
-        <img
-          src={bundle.thumbnail}
-          alt={bundle.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-        />
+        {bundle.category === 'Combo' || String(bundle.id) === '5' ? (
+          <div className="w-full h-full grid grid-cols-2 grid-rows-2 gap-0.5 bg-slate-950 p-0.5 group-hover:scale-105 transition-transform duration-500 ease-out">
+            <img src="/roblox_reels_bundle.jpg" alt="Roblox" className="w-full h-full object-cover rounded-tl-lg" />
+            <img src="/car_crash_bundle.jpg" alt="Car Crash" className="w-full h-full object-cover rounded-tr-lg" />
+            <img src="/ai_girls_dancing_bundle.png" alt="AI Girls" className="w-full h-full object-cover rounded-bl-lg" />
+            <img src="/stickman_content_bundle.jpg" alt="Stickman" className="w-full h-full object-cover rounded-br-lg" />
+          </div>
+        ) : (
+          <img
+            src={bundle.thumbnail}
+            alt={bundle.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+          />
+        )}
         {/* Subtle Bottom Gradient Overlay for badge contrast */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none" />
 
