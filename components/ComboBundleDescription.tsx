@@ -38,7 +38,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
     <div className="space-y-10 pt-8 border-t border-slate-200 text-slate-800">
       
       {/* Hero Banner Box */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-950 via-slate-950 to-orange-950 p-6 sm:p-10 text-white shadow-2xl border border-brand-500/30">
+      <div className="relative overflow-hidden rounded-3xl bg-slate-950 p-6 sm:p-10 text-white shadow-2xl border border-slate-800">
         <div className="absolute top-0 right-0 -mt-8 -mr-8 w-80 h-80 bg-brand-500/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 -mb-8 -ml-8 w-80 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
