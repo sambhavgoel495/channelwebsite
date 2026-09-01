@@ -27,6 +27,7 @@ import { ComboBundleDescription } from '@/components/ComboBundleDescription';
 import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescription';
 import { MotivationalBundleDescription } from '@/components/MotivationalBundleDescription';
 import { MixBundleDescription } from '@/components/MixBundleDescription';
+import { FreeFireBundleDescription } from '@/components/FreeFireBundleDescription';
 import { DriveDropdown } from '@/components/DriveDropdown';
 
 export default function BundleDetailsPage() {
@@ -384,9 +385,11 @@ export default function BundleDetailsPage() {
                               ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
                               : String(bundle.id) === '8'
                                 ? 'https://drive.google.com/drive/folders/1R0YYII2rF3iv8X26iCQ_BXzT6w-uMOAQ'
-                                : '#'
+                                : String(bundle.id) === '9'
+                                  ? 'https://drive.google.com/drive/folders/1SOGtLNLJG7ZZaNZkZezhV6A7t-ASswqb'
+                                  : '#'
                       )}
-                      target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' || String(bundle.id) === '8' ? '_blank' : undefined}
+                      target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' || String(bundle.id) === '8' || String(bundle.id) === '9' ? '_blank' : undefined}
                       rel="noopener noreferrer"
                       className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
                     >
@@ -462,6 +465,11 @@ export default function BundleDetailsPage() {
       {/* Rich Mix Reels Sales Description (Rendered for Mix Reels Bundle id: 8) */}
       {String(bundle.id) === '8' && (
         <MixBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Free Fire Sales Description (Rendered for Free Fire Bundle id: 9) */}
+      {String(bundle.id) === '9' && (
+        <FreeFireBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}

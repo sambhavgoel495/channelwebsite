@@ -121,12 +121,32 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '22.1M'
+  },
+  {
+    id: 'demo-15',
+    title: 'Free Fire Epic Headshot & Clutch Reel 🔥',
+    duration: '0:22',
+    thumbnail: '/freefire_reels_bundle.jpg',
+    videoUrl: '/freefiredemo1.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '19.8M'
+  },
+  {
+    id: 'demo-16',
+    title: 'Free Fire 1v4 Montage & Pro Gameplay 🏆',
+    duration: '0:25',
+    thumbnail: '/freefire_reels_bundle.jpg',
+    videoUrl: '/freefiredemo2.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '24.5M'
   }
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 7 },
-  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 5 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 8 },
+  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 6 },
   { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
 ];
 
@@ -453,6 +473,46 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Organized Google Drive Folders'
     ],
     driveUrl: 'https://drive.google.com/drive/folders/1R0YYII2rF3iv8X26iCQ_BXzT6w-uMOAQ'
+  },
+  {
+    id: '9',
+    title: '3,600+ Free Fire Viral Reels Bundle',
+    slug: 'free-fire-viral-reels-bundle',
+    tagline: '3,600+ High Impact Gaming & Headshot Reels',
+    description: 'A massive collection of entertaining Free Fire gameplay clips made specifically for short-form gaming creators.',
+    price: 39,
+    originalPrice: 399,
+    videoCount: 3600,
+    category: 'Trending',
+    categoryBadge: 'FREE FIRE GAMING',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/freefire_reels_bundle.jpg',
+    previewVideoUrl: '/freefiredemo1.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 860,
+    freeDemos: [SAMPLE_VIDEOS[12], SAMPLE_VIDEOS[13]],
+    lockedVideosCount: 3598,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `ff-${i + 1}`,
+      title: `Free Fire Clip #${i + 1}`,
+      duration: `0:${15 + (i % 20)}`,
+      thumbnail: '/freefire_reels_bundle.jpg',
+      videoUrl: '/freefiredemo1.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Trending'
+    })),
+    whatsInside: [
+      '3,600+ Short-Form Free Fire Videos',
+      'Designed for Shorts, Reels & TikTok',
+      'Epic Headshots, Clutch & Funny Gameplay Moments',
+      'No Watermarks or Logos',
+      'Organized Google Drive Library'
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1SOGtLNLJG7ZZaNZkZezhV6A7t-ASswqb'
   }
 ];
 
