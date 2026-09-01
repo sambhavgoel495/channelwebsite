@@ -233,31 +233,37 @@ export default function HomePage() {
 
       {/* 2. FREE DEMO SECTION ("TRY BEFORE YOU BUY") */}
       <section id="free-demos" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="p-8 sm:p-12 rounded-3xl bg-white border border-slate-200/80 shadow-xl relative overflow-hidden">
+        <div className="p-6 sm:p-10 rounded-3xl bg-white border border-slate-200/80 shadow-xl relative overflow-hidden">
           {/* Ambient light glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-orange-100/60 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
             <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-black tracking-wider uppercase border border-emerald-200">
               FREE PREVIEWS
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               Try Before You Buy
             </h2>
-            <p className="text-sm text-slate-600 font-medium">
-              Watch a couple of free previews from our video library to check the quality and retention before making a purchase.
+            <p className="text-xs sm:text-sm text-slate-600 font-medium">
+              Watch free video previews across our top categories to verify the high retention and crystal-clear quality.
             </p>
           </div>
 
-          {/* 2 Featured Large Demo Video Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[SAMPLE_VIDEOS[0], SAMPLE_VIDEOS[2]].map((demo) => (
+          {/* 5 Featured Compact Demo Video Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-1') || SAMPLE_VIDEOS[0],
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-3') || SAMPLE_VIDEOS[2],
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-7') || SAMPLE_VIDEOS[4],
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-9') || SAMPLE_VIDEOS[6],
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-15') || SAMPLE_VIDEOS[12],
+            ].filter(Boolean).map((demo) => (
               <div
                 key={demo.id}
                 onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl, duration: demo.duration })}
-                className="group relative bg-white rounded-2xl border border-slate-200 hover:border-brand-400 overflow-hidden shadow-md cursor-pointer transition-all duration-300 hover:-translate-y-1.5"
+                className="group relative bg-white rounded-2xl border border-slate-200 hover:border-brand-500 overflow-hidden shadow-sm hover:shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col"
               >
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-900">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900 shrink-0">
                   <img
                     src={demo.thumbnail}
                     alt={demo.title}
@@ -266,33 +272,40 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
                   {/* Badges */}
-                  <div className="absolute top-3 left-3 flex items-center space-x-2">
-                    <span className="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-white rounded-md shadow-sm">
+                  <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
+                    <span className="px-2 py-0.5 text-[9px] font-black uppercase tracking-wider bg-emerald-500 text-white rounded shadow-sm">
                       FREE DEMO
                     </span>
-                    <span className="px-2 py-0.5 text-[9px] font-bold bg-slate-900/80 text-white rounded">
+                    <span className="px-1.5 py-0.5 text-[9px] font-bold bg-slate-900/80 text-white rounded">
                       {demo.duration}
                     </span>
                   </div>
 
                   {/* Center Play button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-white/90 border border-white/40 backdrop-blur-md flex items-center justify-center group-hover:bg-brand-500 group-hover:scale-110 transition-all duration-300 shadow-2xl">
-                      <Play className="w-6 h-6 text-brand-600 fill-brand-600 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
+                    <div className="w-10 h-10 rounded-full bg-white/90 border border-white/40 backdrop-blur-md flex items-center justify-center group-hover:bg-brand-500 group-hover:scale-110 transition-all duration-300 shadow-xl">
+                      <Play className="w-4 h-4 text-brand-600 fill-brand-600 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
                     </div>
                   </div>
                 </div>
 
-                <div className="p-5 flex items-center justify-between">
+                <div className="p-3.5 flex flex-col justify-between flex-1 space-y-2">
                   <div>
-                    <span className="text-[10px] font-black uppercase text-brand-600">{demo.category}</span>
-                    <h4 className="text-base font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors">
+                    <span className="text-[9px] font-black uppercase tracking-wider text-brand-600 block mb-0.5">
+                      {demo.category}
+                    </span>
+                    <h4 className="text-xs font-black text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-1 leading-snug">
                       {demo.title}
                     </h4>
                   </div>
-                  <button className="px-4 py-2 text-xs font-extrabold bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl border border-slate-200">
-                    Watch Demo
-                  </button>
+                  
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10px]">
+                    <span className="font-bold text-slate-400">🔥 {demo.viewsCount || 'Viral'}</span>
+                    <span className="font-black text-brand-600 group-hover:underline flex items-center">
+                      <span>Watch</span>
+                      <ArrowRight className="w-2.5 h-2.5 ml-0.5" />
+                    </span>
+                  </div>
                 </div>
               </div>
             ))}
