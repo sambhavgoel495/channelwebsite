@@ -26,6 +26,7 @@ import { StickmanBundleDescription } from '@/components/StickmanBundleDescriptio
 import { ComboBundleDescription } from '@/components/ComboBundleDescription';
 import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescription';
 import { MotivationalBundleDescription } from '@/components/MotivationalBundleDescription';
+import { DriveDropdown } from '@/components/DriveDropdown';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -363,23 +364,33 @@ export default function BundleDetailsPage() {
                   <span>You own this bundle! Instant downloads available.</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <a
-                    href={bundle.driveUrl || (
-                      String(bundle.id) === '1'
-                        ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
-                        : String(bundle.id) === '2'
-                          ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
-                          : String(bundle.id) === '4'
-                            ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
-                            : '#'
-                    )}
-                    target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' ? '_blank' : undefined}
-                    rel="noopener noreferrer"
-                    className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Google Drive</span>
-                  </a>
+                  {String(bundle.id) === '7' ? (
+                    <DriveDropdown
+                      links={[
+                        { label: 'Quotes Pack (Part 1)', url: 'https://drive.google.com/file/d/1AiBYpIBTlT2YqYDeAn2RTreGzTtVMBZ5/view?usp=drivesdk', badge: 'Part 1' },
+                        { label: 'Quotes Pack (Part 2)', url: 'https://drive.google.com/file/d/1wCNM6pGEHqrVQSS4L3MgPOqpYNys9-hQ/view?usp=drivesdk', badge: 'Part 2' }
+                      ]}
+                      className="w-full"
+                    />
+                  ) : (
+                    <a
+                      href={bundle.driveUrl || (
+                        String(bundle.id) === '1'
+                          ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
+                          : String(bundle.id) === '2'
+                            ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
+                            : String(bundle.id) === '4'
+                              ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
+                              : '#'
+                      )}
+                      target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' ? '_blank' : undefined}
+                      rel="noopener noreferrer"
+                      className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Google Drive</span>
+                    </a>
+                  )}
                   <Link
                     href="/my-library"
                     className="py-3 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md"

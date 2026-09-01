@@ -270,15 +270,26 @@ export const MotivationalBundleDescription: React.FC<Props> = ({ bundle }) => {
                 <span>GET THE 9,000+ MOTIVATIONAL BUNDLE TODAY — ₹{bundle.price || 39}</span>
               </button>
             ) : (
-              <a
-                href={bundle?.driveUrl || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-white text-emerald-700 hover:bg-slate-100 text-sm font-black rounded-2xl shadow-2xl transition-transform hover:scale-105 inline-flex items-center space-x-2"
-              >
-                <FolderDown className="w-4 h-4" />
-                <span>OPEN GOOGLE DRIVE FOLDER NOW</span>
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href="https://drive.google.com/file/d/1AiBYpIBTlT2YqYDeAn2RTreGzTtVMBZ5/view?usp=drivesdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 bg-white text-slate-950 hover:bg-slate-100 text-xs font-black rounded-2xl shadow-xl transition-transform hover:scale-105 inline-flex items-center space-x-2"
+                >
+                  <FolderDown className="w-4 h-4 text-amber-500" />
+                  <span>DOWNLOAD PART 1 (QUOTES PACK)</span>
+                </a>
+                <a
+                  href="https://drive.google.com/file/d/1wCNM6pGEHqrVQSS4L3MgPOqpYNys9-hQ/view?usp=drivesdk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 bg-slate-900 text-white hover:bg-slate-800 text-xs font-black rounded-2xl shadow-xl transition-transform hover:scale-105 inline-flex items-center space-x-2 border border-slate-700"
+                >
+                  <FolderDown className="w-4 h-4 text-amber-400" />
+                  <span>DOWNLOAD PART 2 (QUOTES PACK)</span>
+                </a>
+              </div>
             )}
           </div>
         </div>

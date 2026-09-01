@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { DriveDropdown } from '@/components/DriveDropdown';
 
 export default function MyLibraryPage() {
   const { 
@@ -204,34 +205,44 @@ export default function MyLibraryPage() {
                   {/* Access CTAs */}
                   <div className="pt-2 border-t border-slate-100">
                     <div className="grid grid-cols-2 gap-2">
-                      {(() => {
-                        const driveLink = bundle.driveUrl || (
-                          String(bundle.id) === '1'
-                            ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
-                            : String(bundle.id) === '2'
-                              ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
-                              : String(bundle.id) === '4'
-                                ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
-                                : null
-                        );
-                        return (
-                          <a
-                            href={driveLink || '#'}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => {
-                              if (!driveLink) {
-                                e.preventDefault();
-                                handleMockDriveAccess(bundle.title);
-                              }
-                            }}
-                            className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
-                          >
-                            <ExternalLink className="w-3.5 h-3.5 text-white" />
-                            <span>Google Drive</span>
-                          </a>
-                        );
-                      })()}
+                      {String(bundle.id) === '7' ? (
+                        <DriveDropdown
+                          links={[
+                            { label: 'Quotes Pack (Part 1)', url: 'https://drive.google.com/file/d/1AiBYpIBTlT2YqYDeAn2RTreGzTtVMBZ5/view?usp=drivesdk', badge: 'Part 1' },
+                            { label: 'Quotes Pack (Part 2)', url: 'https://drive.google.com/file/d/1wCNM6pGEHqrVQSS4L3MgPOqpYNys9-hQ/view?usp=drivesdk', badge: 'Part 2' }
+                          ]}
+                          className="w-full"
+                        />
+                      ) : (
+                        (() => {
+                          const driveLink = bundle.driveUrl || (
+                            String(bundle.id) === '1'
+                              ? 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
+                              : String(bundle.id) === '2'
+                                ? 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV'
+                                : String(bundle.id) === '4'
+                                  ? 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0'
+                                  : null
+                          );
+                          return (
+                            <a
+                              href={driveLink || '#'}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => {
+                                if (!driveLink) {
+                                  e.preventDefault();
+                                  handleMockDriveAccess(bundle.title);
+                                }
+                              }}
+                              className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5 text-white" />
+                              <span>Google Drive</span>
+                            </a>
+                          );
+                        })()
+                      )}
 
                       <button
                         onClick={() => openVideoPreview({ title: `${bundle.title} (Main Preview)`, videoUrl: bundle.previewVideoUrl })}
