@@ -25,6 +25,7 @@ import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescriptio
 import { StickmanBundleDescription } from '@/components/StickmanBundleDescription';
 import { ComboBundleDescription } from '@/components/ComboBundleDescription';
 import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescription';
+import { MotivationalBundleDescription } from '@/components/MotivationalBundleDescription';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -437,6 +438,11 @@ export default function BundleDetailsPage() {
       {/* Rich Satisfying Sales Description (Rendered for Satisfying Bundle id: 6) */}
       {String(bundle.id) === '6' && (
         <SatisfyingBundleDescription bundle={bundle} />
+      )}
+
+      {/* Rich Motivational Sales Description (Rendered for Motivational Bundle id: 7) */}
+      {String(bundle.id) === '7' && (
+        <MotivationalBundleDescription bundle={bundle} />
       )}
 
       {/* What's Inside & Locked Grid Section */}

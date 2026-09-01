@@ -81,12 +81,32 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '9.2M'
+  },
+  {
+    id: 'demo-11',
+    title: 'Discipline & Success Motivation Reel 🔥',
+    duration: '0:20',
+    thumbnail: '/motivational_quotes_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '12.4M'
+  },
+  {
+    id: 'demo-12',
+    title: 'Hustle, Mindset & Wealth Reel 💭',
+    duration: '0:28',
+    thumbnail: '/motivational_quotes_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-running-on-a-rural-road-at-sunset-41406-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '15.8M'
   }
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 5 },
-  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 3 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 6 },
+  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 4 },
   { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
 ];
 
@@ -333,6 +353,45 @@ export const MOCK_BUNDLES: Bundle[] = [
       'High-Quality Oddly Satisfying Clips',
       'No Watermarks or Logos',
       'Organized Google Drive Library'
+    ]
+  },
+  {
+    id: '7',
+    title: '9,000+ Motivational Quotes Bundle',
+    slug: 'motivational-quotes-reels-bundle',
+    tagline: '9,000+ High Quality Motivational Reels & Quotes Templates',
+    description: 'A massive collection of motivational and inspirational quotes and reel templates created for content creators, theme pages and faceless channels.',
+    price: 39,
+    originalPrice: 299,
+    videoCount: 9000,
+    category: 'Trending',
+    categoryBadge: 'MOTIVATIONAL REELS',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/motivational_quotes_bundle.jpg',
+    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 740,
+    freeDemos: [SAMPLE_VIDEOS[8], SAMPLE_VIDEOS[9]],
+    lockedVideosCount: 8998,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `mq-${i + 1}`,
+      title: `Motivational Quote Reel #${i + 1}`,
+      duration: `0:${15 + (i % 20)}`,
+      thumbnail: '/motivational_quotes_bundle.jpg',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Trending'
+    })),
+    whatsInside: [
+      '9,000+ Motivational & Inspirational Quotes',
+      'Content Suitable for Posts, Stories & Reels',
+      'High-Quality 9:16 Viral Reel Templates',
+      'Organized ZIP Format & Easy Access',
+      'No Watermarks or Logos'
     ]
   }
 ];
