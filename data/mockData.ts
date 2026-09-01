@@ -101,12 +101,32 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '15.8M'
+  },
+  {
+    id: 'demo-13',
+    title: 'Multi-Niche Trending Viral Reel 🔥',
+    duration: '0:24',
+    thumbnail: '/mix_reels_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '18.4M'
+  },
+  {
+    id: 'demo-14',
+    title: 'Luxury & Lifestyle Viral Reel ✨',
+    duration: '0:26',
+    thumbnail: '/mix_reels_bundle.jpg',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-running-on-a-rural-road-at-sunset-41406-large.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '22.1M'
   }
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 6 },
-  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 4 },
+  { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 7 },
+  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 5 },
   { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
 ];
 
@@ -393,6 +413,46 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Organized ZIP Format & Easy Access',
       'No Watermarks or Logos'
     ]
+  },
+  {
+    id: '8',
+    title: '60K+ Mix Viral Reel Bundle',
+    slug: '60k-mix-viral-reel-bundle',
+    tagline: '60,000+ Viral Reels Covering 30+ Trending Niches',
+    description: 'A massive collection of viral short-form content covering 30+ mega bundles and multiple trending niches, all packed together in one place.',
+    price: 39,
+    originalPrice: 499,
+    videoCount: 60000,
+    category: 'Trending',
+    categoryBadge: '60K+ MIX REELS',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/mix_reels_bundle.jpg',
+    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 980,
+    freeDemos: [SAMPLE_VIDEOS[10], SAMPLE_VIDEOS[11]],
+    lockedVideosCount: 59998,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `mix-${i + 1}`,
+      title: `Mix Reel #${i + 1}`,
+      duration: `0:${15 + (i % 20)}`,
+      thumbnail: '/mix_reels_bundle.jpg',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-silhouette-of-a-man-standing-on-a-mountain-at-sunset-41405-large.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Trending'
+    })),
+    whatsInside: [
+      '60,000+ Viral Short-Form Reels',
+      '30+ Mega Bundles in One Pack',
+      'Multiple Trending Niches (AI, Motivation, Fitness, Supercars, etc.)',
+      'No Watermarks or Logos',
+      'Organized Google Drive Folders'
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1R0YYII2rF3iv8X26iCQ_BXzT6w-uMOAQ'
   }
 ];
 
