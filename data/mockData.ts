@@ -157,7 +157,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     slug: 'roblox-reels-bundle',
     tagline: '3000+ High Quality Viral Roblox Reels',
     description: 'Boost your content, grow your page, go viral with 3000+ viral Roblox reels ready to post.',
-    price: 49,
+    price: 39,
     originalPrice: 299,
     videoCount: 3000,
     category: 'Trending',

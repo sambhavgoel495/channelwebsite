@@ -166,7 +166,7 @@ export const RobloxBundleDescription: React.FC<Props> = ({ bundle }) => {
               <span>LIFETIME ACCESS</span>
             </div>
             <h5 className="font-extrabold text-white text-xs uppercase">No Recurring Subscriptions</h5>
-            <p className="text-xs text-slate-300 font-medium">One-time purchase of ₹49. No monthly subscription. No recurring fees. Buy once, download and publish forever.</p>
+            <p className="text-xs text-slate-300 font-medium">One-time purchase of ₹39. No monthly subscription. No recurring fees. Buy once, download and publish forever.</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-2">
@@ -232,7 +232,7 @@ export const RobloxBundleDescription: React.FC<Props> = ({ bundle }) => {
 
         <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 text-center">
           {[
-            { step: '1️⃣', title: 'PURCHASE', desc: 'Complete your one-time ₹49 purchase.' },
+            { step: '1️⃣', title: 'PURCHASE', desc: 'Complete your one-time ₹39 purchase.' },
             { step: '2️⃣', title: 'GET ACCESS', desc: 'Instant access to your 3,000+ Roblox bundle.' },
             { step: '3️⃣', title: 'DOWNLOAD', desc: 'Choose clips and download from Google Drive.' },
             { step: '4️⃣', title: 'EDIT', desc: 'Add music, captions, hooks, memes & effects.' },
