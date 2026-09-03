@@ -260,7 +260,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* 4 Demo Videos with Play Overlay */}
+              {/* 4 Demo Videos with Native Video Frame & Play Overlay */}
               <div className="space-y-1.5">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-400 flex items-center space-x-1">
                   <Play className="w-3 h-3 fill-orange-400" />
@@ -271,15 +271,21 @@ export default function HomePage() {
                     <div
                       key={idx}
                       onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl })}
-                      className="group relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 cursor-pointer shadow-xs hover:border-orange-500 transition-colors"
+                      className="group relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-black cursor-pointer shadow-xs hover:border-orange-500 transition-colors flex items-center justify-center"
                     >
-                      <img src={demo.thumbnail} alt={demo.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
-                        <div className="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow-xs">
-                          <Play className="w-2.5 h-2.5 text-zinc-950 fill-zinc-950 ml-0.5" />
+                      <video
+                        src={`${demo.videoUrl}#t=0.001`}
+                        preload="metadata"
+                        playsInline
+                        muted
+                        className="w-full h-full object-cover bg-black group-hover:scale-105 transition-transform duration-300 pointer-events-none"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                        <div className="w-6 h-6 rounded-full bg-white/95 border border-white/40 flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-orange-600 transition-all">
+                          <Play className="w-2.5 h-2.5 text-zinc-950 fill-zinc-950 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
                         </div>
                       </div>
-                      <span className="absolute bottom-1 left-0.5 right-0.5 text-[8px] font-semibold text-white text-center truncate bg-black/70 rounded px-0.5">
+                      <span className="absolute bottom-1 left-0.5 right-0.5 text-[8px] font-semibold text-white text-center truncate bg-black/75 rounded px-0.5 pointer-events-none">
                         {demo.badge}
                       </span>
                     </div>
@@ -349,7 +355,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* 6 Demo Videos with Play Overlay */}
+              {/* 6 Demo Videos with Native Video Frame & Play Overlay */}
               <div className="space-y-1.5">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-400 flex items-center space-x-1">
                   <Play className="w-3 h-3 fill-orange-400" />
@@ -360,15 +366,21 @@ export default function HomePage() {
                     <div
                       key={idx}
                       onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl })}
-                      className="group relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 cursor-pointer shadow-xs hover:border-orange-500 transition-colors"
+                      className="group relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-black cursor-pointer shadow-xs hover:border-orange-500 transition-colors flex items-center justify-center"
                     >
-                      <img src={demo.thumbnail} alt={demo.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
-                        <div className="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow-xs">
-                          <Play className="w-2.5 h-2.5 text-zinc-950 fill-zinc-950 ml-0.5" />
+                      <video
+                        src={`${demo.videoUrl}#t=0.001`}
+                        preload="metadata"
+                        playsInline
+                        muted
+                        className="w-full h-full object-cover bg-black group-hover:scale-105 transition-transform duration-300 pointer-events-none"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                        <div className="w-6 h-6 rounded-full bg-white/95 border border-white/40 flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-orange-600 transition-all">
+                          <Play className="w-2.5 h-2.5 text-zinc-950 fill-zinc-950 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
                         </div>
                       </div>
-                      <span className="absolute bottom-1 left-0.5 right-0.5 text-[8px] font-semibold text-white text-center truncate bg-black/70 rounded px-0.5">
+                      <span className="absolute bottom-1 left-0.5 right-0.5 text-[8px] font-semibold text-white text-center truncate bg-black/75 rounded px-0.5 pointer-events-none">
                         {demo.badge}
                       </span>
                     </div>
