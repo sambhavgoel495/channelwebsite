@@ -26,6 +26,7 @@ import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescri
 import { MotivationalBundleDescription } from '@/components/MotivationalBundleDescription';
 import { MixBundleDescription } from '@/components/MixBundleDescription';
 import { FreeFireBundleDescription } from '@/components/FreeFireBundleDescription';
+import { AIInfluencerBundleDescription } from '@/components/AIInfluencerBundleDescription';
 import { AllBundlesDescription } from '@/components/AllBundlesDescription';
 import { DriveDropdown } from '@/components/DriveDropdown';
 
@@ -456,6 +457,7 @@ export default function BundleDetailsPage() {
       {/* Rich Bundle Sales Description Components */}
       {String(bundle.id) === '1' && <RobloxBundleDescription bundle={bundle} />}
       {String(bundle.id) === '2' && <CarCrashBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '3' && <AIInfluencerBundleDescription bundle={bundle} />}
       {String(bundle.id) === '4' && <StickmanBundleDescription bundle={bundle} />}
       {String(bundle.id) === '5' && <ComboBundleDescription bundle={bundle} />}
       {String(bundle.id) === '6' && <SatisfyingBundleDescription bundle={bundle} />}
