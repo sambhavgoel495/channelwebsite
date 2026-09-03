@@ -138,8 +138,8 @@ export default function HomePage() {
     },
     {
       name: 'AI Dancing',
-      title: 'AI Influencer Viral Reel #2',
-      videoUrl: '/aiinfluencerdemo2.mp4',
+      title: 'AI Influencer Viral Dance Reel #1',
+      videoUrl: '/aiinfluencerdemo1.mp4',
       thumbnail: '/ai_girls_dancing_bundle.png',
       badge: 'AI Influencer'
     },
