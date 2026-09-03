@@ -42,7 +42,7 @@ export const AllBundlesDescription: React.FC<Props> = ({ bundle }) => {
     { id: '7', title: 'Motivational Quotes', count: '9,000+ Quotes', image: '/motivational_quotes_bundle.jpg' },
     { id: '8', title: '60K+ Mix Viral Reels', count: '60,000+ Clips', image: '/mix_reels_bundle.jpg' },
     { id: '9', title: 'Free Fire Reels', count: '3,600+ Clips', image: '/freefire_reels_bundle.jpg' },
-    { id: '3', title: 'AI Influencer Reels', count: '5,000+ Clips', image: '/ai_girls_dancing_bundle.png' },
+    { id: '3', title: 'AI Influencer Reels', count: '3,000+ Clips', image: '/ai_girls_dancing_bundle.png' },
   ];
 
   return (

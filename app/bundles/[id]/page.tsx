@@ -212,7 +212,7 @@ export default function BundleDetailsPage() {
                   <span>Car Crash (8,000+)</span>
                 </div>
                 <div className="flex items-center justify-between text-xs font-medium text-zinc-300">
-                  <span>AI Influencer (5,000+)</span>
+                  <span>AI Influencer (3,000+)</span>
                   <span>Stickman (1,000+)</span>
                 </div>
                 <div className="pt-2 border-t border-zinc-800 flex items-center justify-between">

@@ -174,13 +174,13 @@ export const MOCK_CATEGORIES: Category[] = [
 export const MOCK_BUNDLES: Bundle[] = [
   {
     id: '3',
-    title: '5000+ AI Influencer Reels Bundle',
+    title: '3000+ AI Influencer Reels Bundle',
     slug: 'ai-girls-dancing-reels-bundle',
-    tagline: '5,000+ High Quality AI Influencer Dancing Reels',
-    description: '5,000+ HD AI influencer & dancing reels, crisp, clear & professional videos optimized for viral short-form growth.',
+    tagline: '3,000+ High Quality AI Influencer Dancing Reels',
+    description: '3,000+ HD AI influencer & dancing reels, crisp, clear & professional videos optimized for viral short-form growth.',
     price: 39,
     originalPrice: 399,
-    videoCount: 5000,
+    videoCount: 3000,
     category: 'Trending',
     categoryBadge: 'AI INFLUENCER',
     formatBadge: '9:16 VERTICAL HD',
@@ -195,7 +195,7 @@ export const MOCK_BUNDLES: Bundle[] = [
       SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-1') || SAMPLE_VIDEOS[SAMPLE_VIDEOS.length - 2],
       SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-2') || SAMPLE_VIDEOS[SAMPLE_VIDEOS.length - 1]
     ],
-    lockedVideosCount: 4998,
+    lockedVideosCount: 2998,
     sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
       id: `ai-${i + 1}`,
       title: `AI Influencer Clip #${i + 1}`,
@@ -207,7 +207,7 @@ export const MOCK_BUNDLES: Bundle[] = [
       category: 'Trending'
     })),
     whatsInside: [
-      '5,000+ AI Influencer Dancing & Fashion Clips',
+      '3,000+ AI Influencer Dancing & Fashion Clips',
       'Ultra Realistic Visuals & High Retention Beats',
       'Vertical 9:16 Format for Shorts, Reels & TikTok',
       'Full Commercial Rights Included',
@@ -375,7 +375,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     whatsInside: [
       '3,000+ Roblox Viral Video Clips',
       '8,000+ BeamNG Car Crash Videos',
-      '5,000+ AI Influencer Reels',
+      '3,000+ AI Influencer Reels',
       '1,000+ Stickman Action Videos',
       'Instant Google Drive Access to All 4 Folders',
       'Full Commercial Rights & Lifetime Access'
@@ -579,7 +579,7 @@ export const MOCK_BUNDLES: Bundle[] = [
       '9,000+ Motivational Quotes Reels',
       '60,000+ Mix Trending Viral Reels',
       '3,600+ Free Fire Gaming Clips',
-      '5,000+ AI Influencer Reels',
+      '3,000+ AI Influencer Reels',
       'All 8 Google Drive Cloud Libraries Included',
       'Full Commercial Monetization License'
     ],
