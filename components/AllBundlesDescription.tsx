@@ -61,11 +61,11 @@ export const AllBundlesDescription: React.FC<Props> = ({ bundle }) => {
           </h2>
 
           <p className="text-sm sm:text-base font-semibold text-orange-400">
-            Get Lifetime Access to ALL 8 Mega Bundles (88,000+ Total Videos) for Only ₹149! 🚀
+            Get Lifetime Access to ALL 8 Mega Bundles (1,000,000+ Total Clips) for Only ₹149! 🚀
           </p>
 
           <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
-            Unlock every single niche pack on LittleVault in one ultimate bundle. Over 88,000+ viral clips across Gaming, Animation, Satisfying, Quotes, and Multi-Niche viral content.
+            Unlock every single niche pack on LittleVault in one ultimate bundle. Over 1,000,000+ viral clips across Gaming, Animation, Satisfying, Quotes, and Multi-Niche viral content.
           </p>
         </div>
       </div>
@@ -140,7 +140,7 @@ export const AllBundlesDescription: React.FC<Props> = ({ bundle }) => {
       <div className="rounded-2xl bg-zinc-950 p-6 sm:p-8 text-white shadow-card text-center space-y-4 border border-zinc-800">
         <div className="max-w-xl mx-auto space-y-2">
           <h3 className="text-lg sm:text-xl font-bold tracking-tight uppercase">
-            🚀 UNLOCK ALL 88,000+ CLIPS TODAY FOR ₹149!
+            🚀 UNLOCK ALL 1,000,000+ CLIPS TODAY FOR ₹149!
           </h3>
           <p className="text-xs text-zinc-400 font-normal">
             One single payment. Lifetime Google Drive cloud access to all 8 video bundles.

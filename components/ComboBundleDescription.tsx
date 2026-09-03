@@ -53,7 +53,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
           </h2>
 
           <p className="text-lg sm:text-xl font-bold text-amber-400">
-            Get ALL 4 Premium Video Vaults (15,000+ Total Clips) for Only ₹99! 🚀
+            Get ALL 4 Premium Video Vaults (100,000+ Total Clips) for Only ₹99! 🚀
           </p>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
@@ -189,7 +189,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
       <div className="rounded-3xl bg-gradient-to-r from-brand-600 via-orange-600 to-amber-500 p-6 sm:p-10 text-white shadow-2xl text-center space-y-6 relative overflow-hidden">
         <div className="max-w-2xl mx-auto space-y-3 relative z-10">
           <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase">
-            🚨 UNLOCK ALL 15,000+ CLIPS TODAY FOR ₹99! 🚀
+            🚨 UNLOCK ALL 100,000+ CLIPS TODAY FOR ₹99! 🚀
           </h3>
           <p className="text-sm font-bold text-orange-100">
             One mega purchase. Lifetime Google Drive access to all 4 video bundles. No subscriptions.

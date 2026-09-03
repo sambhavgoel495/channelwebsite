@@ -231,7 +231,7 @@ export default function HomePage() {
               <div className="p-3 bg-zinc-900 rounded-xl border border-zinc-800 space-y-1">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400 font-medium">Total Videos Included:</span>
-                  <span className="text-white font-bold">15,000+ Clips</span>
+                  <span className="text-white font-bold">100,000+ Clips</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400 font-medium">Google Drive Folders:</span>
@@ -320,7 +320,7 @@ export default function HomePage() {
               <div className="p-3 bg-zinc-900 rounded-xl border border-zinc-800 space-y-1">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400 font-medium">Total Vault Content:</span>
-                  <span className="text-white font-bold">88,000+ Videos & Quotes</span>
+                  <span className="text-white font-bold">1,000,000+ Clips</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400 font-medium">Google Drive Folders:</span>
