@@ -12,25 +12,45 @@ function SignupForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [alreadyExists, setAlreadyExists] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const { signUpWithPassword, loginWithGoogle } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams?.get('redirectTo') || '/my-library';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setAlreadyExists(false);
+
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-    setError('');
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters long');
+      return;
+    }
+
     setIsSubmitting(true);
-    setTimeout(() => {
-      login(email, name || 'Creator');
-      setIsSubmitting(false);
+    const res = await signUpWithPassword(email, password, name);
+    setIsSubmitting(false);
+
+    if (!res.success) {
+      setError(res.error || 'Signup failed. Please try again.');
+      if (res.alreadyExists) {
+        setAlreadyExists(true);
+      }
+      return;
+    }
+
+    if (res.needsEmailVerification) {
+      router.push(`/login?registered=true&redirectTo=${encodeURIComponent(redirectTo)}`);
+    } else {
       router.push(redirectTo);
-    }, 800);
+    }
   };
 
   const handleGoogleSignup = async () => {
@@ -59,13 +79,27 @@ function SignupForm() {
               Create Creator Account 🚀
             </h2>
             <p className="text-xs text-slate-600 font-medium mt-1">
-              Join thousands of creators using curated toddler video packs for Reels and Shorts.
+              Join thousands of creators using curated video bundles for Reels and Shorts.
             </p>
           </div>
 
           {error && (
-            <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-xl">
-              ⚠️ {error}
+            <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
+              <div className="flex items-start space-x-2 text-rose-700 text-xs font-bold">
+                <span className="text-sm">⚠️</span>
+                <span>{error}</span>
+              </div>
+              {alreadyExists && (
+                <div className="pt-1">
+                  <Link
+                    href={`/login?redirectTo=${encodeURIComponent(redirectTo)}`}
+                    className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-black rounded-xl shadow-sm transition-all"
+                  >
+                    <span>Sign In to Existing Account</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              )}
             </div>
           )}
 
@@ -143,7 +177,7 @@ function SignupForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl shadow-lg orange-glow transition-all flex items-center justify-center space-x-2 disabled:opacity-50 mt-2"
+              className="w-full py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl shadow-lg orange-glow transition-all flex items-center justify-center space-x-2 disabled:opacity-50 mt-2 cursor-pointer"
             >
               {isSubmitting ? (
                 <span>Creating Account...</span>
@@ -166,7 +200,7 @@ function SignupForm() {
               type="button"
               onClick={handleGoogleSignup}
               disabled={isSubmitting}
-              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 shadow-sm transition-all flex items-center justify-center space-x-2.5 disabled:opacity-50"
+              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 shadow-sm transition-all flex items-center justify-center space-x-2.5 disabled:opacity-50 cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -180,7 +214,7 @@ function SignupForm() {
 
           <div className="text-center text-xs text-slate-600 font-medium">
             Already have an account?{' '}
-            <Link href="/login" className="text-brand-600 font-black hover:underline">
+            <Link href={`/login?redirectTo=${encodeURIComponent(redirectTo)}`} className="text-brand-600 font-black hover:underline">
               Log in
             </Link>
           </div>

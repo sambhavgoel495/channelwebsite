@@ -19,6 +19,8 @@ interface AuthContextType {
   purchasesError: string | null;
   purchasedBundleIds: string[];
   login: (email?: string, name?: string) => void;
+  loginWithPassword: (email: string, password: string) => Promise<{ success: boolean; error?: string; notFound?: boolean }>;
+  signUpWithPassword: (email: string, password: string, name: string) => Promise<{ success: boolean; error?: string; alreadyExists?: boolean; needsEmailVerification?: boolean }>;
   loginWithGoogle: (redirectPath?: string) => Promise<void>;
   logout: () => void;
   toggleAdmin: () => void;
@@ -197,6 +199,158 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     addToast(`Welcome back, ${newUser.name}!`, 'success');
   };
 
+  const loginWithPassword = async (
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string; notFound?: boolean }> => {
+    const cleanEmail = email.trim().toLowerCase();
+
+    // 1. Check if account exists in database / auth
+    try {
+      const { data: exists, error: rpcError } = await supabase.rpc('check_email_exists', {
+        lookup_email: cleanEmail,
+      });
+
+      if (!rpcError && exists === false) {
+        return {
+          success: false,
+          notFound: true,
+          error: 'Account not found. Please sign up first.',
+        };
+      }
+    } catch (err) {
+      console.warn('Could not verify email existence via RPC:', err);
+    }
+
+    // 2. Perform Supabase authentication
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: cleanEmail,
+      password: password,
+    });
+
+    if (error) {
+      const msg = error.message.toLowerCase();
+      if (msg.includes('invalid login credentials') || msg.includes('user not found') || msg.includes('invalid credential')) {
+        // Double check if account exists
+        try {
+          const { data: exists } = await supabase.rpc('check_email_exists', {
+            lookup_email: cleanEmail,
+          });
+          if (exists === false) {
+            return {
+              success: false,
+              notFound: true,
+              error: 'Account not found. Please sign up first.',
+            };
+          }
+        } catch {
+          // Fallback to credential error
+        }
+        return {
+          success: false,
+          error: 'Invalid email or password. Please try again.',
+        };
+      }
+
+      if (msg.includes('email not confirmed')) {
+        return {
+          success: false,
+          error: 'Please verify your email before logging in.',
+        };
+      }
+
+      return {
+        success: false,
+        error: error.message || 'Login failed. Please check your credentials.',
+      };
+    }
+
+    if (data.user) {
+      const meta = data.user.user_metadata;
+      const displayName = meta?.full_name || meta?.name || data.user.email?.split('@')[0] || 'Creator';
+      addToast(`Welcome back, ${displayName}!`, 'success');
+      return { success: true };
+    }
+
+    return { success: false, error: 'Login failed. Please try again.' };
+  };
+
+  const signUpWithPassword = async (
+    email: string,
+    password: string,
+    name: string
+  ): Promise<{ success: boolean; error?: string; alreadyExists?: boolean; needsEmailVerification?: boolean }> => {
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanName = name.trim() || 'Creator';
+
+    // 1. Check if email is already registered
+    try {
+      const { data: exists, error: rpcError } = await supabase.rpc('check_email_exists', {
+        lookup_email: cleanEmail,
+      });
+
+      if (!rpcError && exists === true) {
+        return {
+          success: false,
+          alreadyExists: true,
+          error: 'Account already exists. Please login.',
+        };
+      }
+    } catch (err) {
+      console.warn('Could not verify email existence via RPC:', err);
+    }
+
+    // 2. Perform Supabase registration
+    const { data, error } = await supabase.auth.signUp({
+      email: cleanEmail,
+      password: password,
+      options: {
+        data: {
+          full_name: cleanName,
+          name: cleanName,
+        },
+      },
+    });
+
+    if (error) {
+      const msg = error.message.toLowerCase();
+      if (
+        msg.includes('already registered') ||
+        msg.includes('already exists') ||
+        msg.includes('user already registered')
+      ) {
+        return {
+          success: false,
+          alreadyExists: true,
+          error: 'Account already exists. Please login.',
+        };
+      }
+      return {
+        success: false,
+        error: error.message || 'Signup failed. Please try again.',
+      };
+    }
+
+    // Supabase obfuscation check: if user already exists, identities is empty []
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      return {
+        success: false,
+        alreadyExists: true,
+        error: 'Account already exists. Please login.',
+      };
+    }
+
+    if (data.session) {
+      addToast(`Account created successfully! Welcome, ${cleanName}!`, 'success');
+      return { success: true };
+    } else if (data.user) {
+      addToast('Account created successfully!', 'success');
+      return { success: true, needsEmailVerification: true };
+    }
+
+    return { success: false, error: 'Failed to create account. Please try again.' };
+  };
+
   const loginWithGoogle = async (redirectPath?: string) => {
     const target = redirectPath ? `${window.location.origin}${redirectPath}` : `${window.location.origin}/my-library`;
     const { error } = await supabase.auth.signInWithOAuth({
@@ -296,6 +450,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         purchasesError,
         purchasedBundleIds,
         login,
+        loginWithPassword,
+        signUpWithPassword,
         loginWithGoogle,
         logout,
         toggleAdmin,

@@ -10,20 +10,33 @@ import { SAMPLE_VIDEOS } from '@/data/mockData';
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [notFound, setNotFound] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login, loginWithGoogle } = useAuth();
+  const { loginWithPassword, loginWithGoogle } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams?.get('redirectTo') || '/my-library';
+  const registered = searchParams?.get('registered') === 'true';
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setNotFound(false);
     setIsSubmitting(true);
-    setTimeout(() => {
-      login(email, email.split('@')[0]);
-      setIsSubmitting(false);
-      router.push(redirectTo);
-    }, 800);
+
+    const res = await loginWithPassword(email, password);
+    setIsSubmitting(false);
+
+    if (!res.success) {
+      setError(res.error || 'Login failed. Please check your credentials.');
+      if (res.notFound) {
+        setNotFound(true);
+      }
+      return;
+    }
+
+    router.push(redirectTo);
   };
 
   const handleGoogleLogin = async () => {
@@ -37,9 +50,9 @@ function LoginForm() {
       <div className="w-full max-w-4xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12">
         
         {/* Left Form Section */}
-        <div className="md:col-span-7 p-8 sm:p-12 flex flex-col justify-between space-y-8">
+        <div className="md:col-span-7 p-8 sm:p-12 flex flex-col justify-between space-y-6">
           <div>
-            <Link href="/" className="inline-flex items-center space-x-2.5 mb-8 group">
+            <Link href="/" className="inline-flex items-center space-x-2.5 mb-6 group">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-500 via-orange-500 to-amber-400 flex items-center justify-center shadow-md orange-glow">
                 <PlayCircle className="w-5 h-5 text-white fill-white/20" />
               </div>
@@ -55,6 +68,33 @@ function LoginForm() {
               Log in to access your purchased video bundles and download high-definition clips.
             </p>
           </div>
+
+          {registered && !error && (
+            <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold rounded-2xl flex items-center space-x-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Account created successfully! Please sign in with your credentials.</span>
+            </div>
+          )}
+
+          {error && (
+            <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
+              <div className="flex items-start space-x-2 text-rose-700 text-xs font-bold">
+                <span className="text-sm">⚠️</span>
+                <span>{error}</span>
+              </div>
+              {notFound && (
+                <div className="pt-1">
+                  <Link
+                    href={`/signup?redirectTo=${encodeURIComponent(redirectTo)}`}
+                    className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-black rounded-xl shadow-sm transition-all"
+                  >
+                    <span>Create an Account Now</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
@@ -99,10 +139,10 @@ function LoginForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl shadow-lg orange-glow transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+              className="w-full py-3.5 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-xs font-black rounded-xl shadow-lg orange-glow transition-all flex items-center justify-center space-x-2 disabled:opacity-50 cursor-pointer"
             >
               {isSubmitting ? (
-                <span>Logging in...</span>
+                <span>Signing in...</span>
               ) : (
                 <>
                   <span>Sign In to Vault</span>
@@ -122,7 +162,7 @@ function LoginForm() {
               type="button"
               onClick={handleGoogleLogin}
               disabled={isSubmitting}
-              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 shadow-sm transition-all flex items-center justify-center space-x-2.5 disabled:opacity-50"
+              className="w-full py-3 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold rounded-xl border border-slate-200 shadow-sm transition-all flex items-center justify-center space-x-2.5 disabled:opacity-50 cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -136,7 +176,7 @@ function LoginForm() {
 
           <div className="text-center text-xs text-slate-600 font-medium">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-brand-600 font-black hover:underline">
+            <Link href={`/signup?redirectTo=${encodeURIComponent(redirectTo)}`} className="text-brand-600 font-black hover:underline">
               Create an account
             </Link>
           </div>
