@@ -30,7 +30,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
   const driveLinks = [
     { title: '🎮 3,000+ Roblox Reels Bundle', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB' },
     { title: '🚗 8,000+ Car Crash Bundle', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV' },
-    { title: '💃 3,000+ AI Girls Dancing Reels', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB' },
+    { title: '💃 5,000+ AI Influencer Reels', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB' },
     { title: '🥷 1,000+ Stickman Action Bundle', url: 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0' },
   ];
 
@@ -125,12 +125,12 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
               </div>
               <div>
                 <span className="text-[10px] font-black uppercase text-brand-600">BUNDLE #3</span>
-                <h4 className="font-extrabold text-slate-900 text-sm">💃 3,000+ AI Girls Dancing</h4>
+                <h4 className="font-extrabold text-slate-900 text-sm">💃 5,000+ AI Influencer Reels</h4>
               </div>
-              <p className="text-xs text-slate-600 font-medium">High-retention 1080p AI dancing reels for fast growth.</p>
+              <p className="text-xs text-slate-600 font-medium">High-retention 1080p AI influencer dancing reels for fast growth.</p>
             </div>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
-              <span>Individual: ₹69</span>
+              <span>Individual: ₹39</span>
               <span className="text-emerald-600 font-black">INCLUDED</span>
             </div>
           </div>
