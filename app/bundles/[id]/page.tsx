@@ -29,6 +29,7 @@ import { FreeFireBundleDescription } from '@/components/FreeFireBundleDescriptio
 import { AIInfluencerBundleDescription } from '@/components/AIInfluencerBundleDescription';
 import { AllBundlesDescription } from '@/components/AllBundlesDescription';
 import { DriveDropdown } from '@/components/DriveDropdown';
+import { DemoVideoCard } from '@/components/DemoVideoCard';
 
 export default function BundleDetailsPage() {
   const params = useParams();
@@ -242,54 +243,15 @@ export default function BundleDetailsPage() {
                 </span>
               </div>
 
-              {/* 2 Vertical 9:16 Reel Cards Grid */}
+              {/* 2 Vertical 9:16 Native Video Reel Cards Grid */}
               <div className="grid grid-cols-2 gap-3.5">
                 {demoClips.map((demo, idx) => (
-                  <div
+                  <DemoVideoCard
                     key={demo.id || idx}
-                    onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.video_url || demo.videoUrl, duration: demo.duration })}
-                    className="group relative bg-white rounded-xl border border-zinc-200 hover:border-zinc-300 overflow-hidden shadow-card hover:shadow-card-hover cursor-pointer transition-all duration-200 flex flex-col"
-                  >
-                    {/* 9:16 Aspect Reel Box */}
-                    <div className="relative aspect-[9/16] w-full overflow-hidden bg-zinc-950">
-                      <img
-                        src={demo.thumbnail}
-                        alt={demo.title}
-                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
-
-                      {/* Top Demo Badges */}
-                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10">
-                        <span className="px-1.5 py-0.5 text-[9px] font-semibold uppercase bg-orange-600 text-white rounded shadow-xs">
-                          DEMO #{idx + 1}
-                        </span>
-                        <span className="px-1.5 py-0.5 text-[9px] font-medium bg-black/60 text-white rounded backdrop-blur-sm">
-                          {demo.duration}
-                        </span>
-                      </div>
-
-                      {/* Center Play Button Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-10 h-10 rounded-full bg-white/90 border border-white/40 flex items-center justify-center group-hover:bg-orange-600 group-hover:scale-105 transition-all shadow-xs">
-                          <Play className="w-4 h-4 text-zinc-900 fill-zinc-900 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card Bottom Details & Watch Button */}
-                    <div className="p-3 bg-white space-y-2 border-t border-zinc-100 flex-1 flex flex-col justify-between">
-                      <div>
-                        <span className="text-[9px] font-semibold uppercase text-orange-600 block">9:16 Vertical HD</span>
-                        <p className="text-xs font-bold text-zinc-950 truncate mt-0.5">{demo.title}</p>
-                      </div>
-
-                      <button className="w-full py-1.5 bg-zinc-100 group-hover:bg-zinc-900 text-zinc-700 group-hover:text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center space-x-1 cursor-pointer">
-                        <Play className="w-3 h-3 fill-current" />
-                        <span>Watch Demo</span>
-                      </button>
-                    </div>
-                  </div>
+                    demo={demo}
+                    idx={idx}
+                    onExpand={openVideoPreview}
+                  />
                 ))}
               </div>
             </>
