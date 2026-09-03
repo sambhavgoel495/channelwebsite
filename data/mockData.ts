@@ -321,8 +321,8 @@ export const MOCK_BUNDLES: Bundle[] = [
     slug: 'ultimate-4-in-1-creator-combo-pack',
     tagline: 'Get ALL 4 Mega Bundles (15,000+ Total Videos)',
     description: 'Unlock lifetime access to Roblox (3,000+), BeamNG Car Crash (8,000+), AI Girls Dancing (3,000+), and Stickman Action (1,000+) bundles in one massive combo!',
-    price: 149,
-    originalPrice: 1499,
+    price: 99,
+    originalPrice: 1199,
     videoCount: 15000,
     category: 'Combo',
     categoryBadge: '🔥 4-IN-1 MEGA COMBO',
@@ -513,6 +513,51 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Organized Google Drive Library'
     ],
     driveUrl: 'https://drive.google.com/drive/folders/1SOGtLNLJG7ZZaNZkZezhV6A7t-ASswqb'
+  },
+  {
+    id: '10',
+    title: '🎯 8-in-1 Complete Master Vault (All Bundles)',
+    slug: 'all-in-one-master-vault',
+    tagline: 'Get Lifetime Access to ALL 8 Mega Bundles (88,000+ Total Videos)',
+    description: 'Unlock every single video bundle on LittleVault in one ultimate master collection: Roblox, Car Crash, Stickman, Satisfying, Motivational Quotes, Mix Reels, Free Fire & AI Dancing!',
+    price: 149,
+    originalPrice: 2499,
+    videoCount: 88000,
+    category: 'Combo',
+    categoryBadge: '🎯 8-IN-1 ALL BUNDLES',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/mix_reels_bundle.jpg',
+    previewVideoUrl: '/robloxdemo1.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 1250,
+    freeDemos: [SAMPLE_VIDEOS[0], SAMPLE_VIDEOS[2], SAMPLE_VIDEOS[6], SAMPLE_VIDEOS[4], SAMPLE_VIDEOS[12]],
+    lockedVideosCount: 87990,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `all-${i + 1}`,
+      title: `Master Vault Clip #${i + 1}`,
+      duration: `0:${15 + (i % 20)}`,
+      thumbnail: '/mix_reels_bundle.jpg',
+      videoUrl: '/robloxdemo1.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Combo'
+    })),
+    whatsInside: [
+      '3,000+ Roblox Viral Reels',
+      '8,000+ BeamNG Car Crash Videos',
+      '1,000+ Stickman Action Clips',
+      '1,000+ Satisfying Viral Reels',
+      '9,000+ Motivational Quotes Reels',
+      '60,000+ Mix Trending Viral Reels',
+      '3,600+ Free Fire Gaming Clips',
+      '3,000+ AI Girls Dancing Reels',
+      'All 8 Google Drive Cloud Libraries Included',
+      'Full Commercial Monetization License'
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1R0YYII2rF3iv8X26iCQ_BXzT6w-uMOAQ'
   }
 ];
 

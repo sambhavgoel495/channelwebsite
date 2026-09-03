@@ -26,6 +26,7 @@ import { SatisfyingBundleDescription } from '@/components/SatisfyingBundleDescri
 import { MotivationalBundleDescription } from '@/components/MotivationalBundleDescription';
 import { MixBundleDescription } from '@/components/MixBundleDescription';
 import { FreeFireBundleDescription } from '@/components/FreeFireBundleDescription';
+import { AllBundlesDescription } from '@/components/AllBundlesDescription';
 import { DriveDropdown } from '@/components/DriveDropdown';
 
 export default function BundleDetailsPage() {
@@ -368,6 +369,30 @@ export default function BundleDetailsPage() {
                       ]}
                       className="w-full"
                     />
+                  ) : String(bundle.id) === '10' ? (
+                    <DriveDropdown
+                      links={[
+                        { label: 'Roblox (3K+ Reels)', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB', badge: 'Roblox' },
+                        { label: 'Car Crash (8K+ Videos)', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV', badge: 'Crash' },
+                        { label: 'Stickman (1K+ Clips)', url: 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0', badge: 'Stickman' },
+                        { label: 'Satisfying (1K+ Reels)', url: 'https://drive.google.com/drive/folders/1wCNM6pGEHqrVQSS4L3MgPOqpYNys9-hQ/view?usp=drivesdk', badge: 'Satisfying' },
+                        { label: 'Quotes Pack (Part 1)', url: 'https://drive.google.com/file/d/1AiBYpIBTlT2YqYDeAn2RTreGzTtVMBZ5/view?usp=drivesdk', badge: 'Quotes 1' },
+                        { label: 'Quotes Pack (Part 2)', url: 'https://drive.google.com/file/d/1wCNM6pGEHqrVQSS4L3MgPOqpYNys9-hQ/view?usp=drivesdk', badge: 'Quotes 2' },
+                        { label: 'Mix Reels (60K+ Pack)', url: 'https://drive.google.com/drive/folders/1R0YYII2rF3iv8X26iCQ_BXzT6w-uMOAQ', badge: 'Mix 60K' },
+                        { label: 'Free Fire (3.6K+ Reels)', url: 'https://drive.google.com/drive/folders/1SOGtLNLJG7ZZaNZkZezhV6A7t-ASswqb', badge: 'Free Fire' },
+                      ]}
+                      className="w-full"
+                    />
+                  ) : String(bundle.id) === '5' ? (
+                    <DriveDropdown
+                      links={[
+                        { label: 'Roblox (3K+ Reels)', url: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB', badge: 'Roblox' },
+                        { label: 'Car Crash (8K+ Videos)', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV', badge: 'Crash' },
+                        { label: 'Stickman (1K+ Clips)', url: 'https://drive.google.com/drive/folders/1Y9aHMGLfSXfXzGKNkZcbNPSiVPkBoGt0', badge: 'Stickman' },
+                        { label: 'AI Girls (3K+ Reels)', url: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV', badge: 'AI Girls' },
+                      ]}
+                      className="w-full"
+                    />
                   ) : (
                     <a
                       href={bundle.driveUrl || (
@@ -430,11 +455,12 @@ export default function BundleDetailsPage() {
       {String(bundle.id) === '1' && <RobloxBundleDescription bundle={bundle} />}
       {String(bundle.id) === '2' && <CarCrashBundleDescription bundle={bundle} />}
       {String(bundle.id) === '4' && <StickmanBundleDescription bundle={bundle} />}
-      {(String(bundle.id) === '5' || bundle.category === 'Combo') && <ComboBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '5' && <ComboBundleDescription bundle={bundle} />}
       {String(bundle.id) === '6' && <SatisfyingBundleDescription bundle={bundle} />}
       {String(bundle.id) === '7' && <MotivationalBundleDescription bundle={bundle} />}
       {String(bundle.id) === '8' && <MixBundleDescription bundle={bundle} />}
       {String(bundle.id) === '9' && <FreeFireBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '10' && <AllBundlesDescription bundle={bundle} />}
 
       {/* What's Inside & Locked Grid Section */}
       <div className="space-y-4 pt-4 border-t border-zinc-200">

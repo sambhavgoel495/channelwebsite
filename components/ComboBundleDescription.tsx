@@ -53,7 +53,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
           </h2>
 
           <p className="text-lg sm:text-xl font-bold text-amber-400">
-            Get ALL 4 Premium Video Vaults (15,000+ Total Clips) for Only ₹149! 🚀
+            Get ALL 4 Premium Video Vaults (15,000+ Total Clips) for Only ₹99! 🚀
           </p>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
@@ -189,7 +189,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
       <div className="rounded-3xl bg-gradient-to-r from-brand-600 via-orange-600 to-amber-500 p-6 sm:p-10 text-white shadow-2xl text-center space-y-6 relative overflow-hidden">
         <div className="max-w-2xl mx-auto space-y-3 relative z-10">
           <h3 className="text-2xl sm:text-3xl font-black tracking-tight uppercase">
-            🚨 UNLOCK ALL 15,000+ CLIPS TODAY FOR ₹149! 🚀
+            🚨 UNLOCK ALL 15,000+ CLIPS TODAY FOR ₹99! 🚀
           </h3>
           <p className="text-sm font-bold text-orange-100">
             One mega purchase. Lifetime Google Drive access to all 4 video bundles. No subscriptions.
@@ -202,7 +202,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
                 className="px-8 py-4 bg-white text-brand-600 hover:bg-slate-100 text-sm font-black rounded-2xl shadow-2xl transition-transform hover:scale-105 inline-flex items-center space-x-2 cursor-pointer"
               >
                 <Zap className="w-4 h-4 fill-brand-600" />
-                <span>UNLOCK 4-IN-1 MEGA COMBO NOW — ₹149</span>
+                <span>UNLOCK 4-IN-1 MEGA COMBO NOW — ₹99</span>
               </button>
             ) : (
               <div className="inline-flex items-center space-x-2 px-6 py-3 bg-emerald-500 text-white rounded-2xl font-black text-sm">
