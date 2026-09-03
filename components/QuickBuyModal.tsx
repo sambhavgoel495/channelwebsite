@@ -23,7 +23,7 @@ const loadRazorpayScript = (): Promise<boolean> => {
 };
 
 export const QuickBuyModal: React.FC = () => {
-  const { quickBuyBundle, closeQuickBuy, purchaseBundle, refetchPurchases, user, addToast } = useAuth();
+  const { quickBuyBundle, closeQuickBuy, refetchPurchases, user, addToast } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card'>('upi');
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
@@ -37,7 +37,6 @@ export const QuickBuyModal: React.FC = () => {
       const { data: { session } } = await supabase.auth.getSession();
       const accessToken = session?.access_token;
 
-      // 1. Attempt Real Razorpay Order Creation if server credentials exist
       if (accessToken) {
         const createRes = await fetch('/api/razorpay/create-order', {
           method: 'POST',
@@ -114,7 +113,7 @@ export const QuickBuyModal: React.FC = () => {
                 if (verifyData.success) {
                   await refetchPurchases();
                   try {
-                    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+                    confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
                   } catch (e) {}
                   closeQuickBuy();
                   router.push('/my-library');
@@ -164,49 +163,49 @@ export const QuickBuyModal: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={closeQuickBuy}
-          className="fixed inset-0 bg-slate-900/60 backdrop-blur-md"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm"
         />
 
         {/* Modal Window */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative z-10 w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden"
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
+          className="relative z-10 w-full max-w-md bg-white border border-zinc-200 rounded-2xl shadow-dropdown overflow-hidden"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-slate-50/80">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-100 bg-zinc-50/50">
             <div className="flex items-center space-x-2">
-              <Zap className="w-5 h-5 text-brand-500" />
-              <h3 className="text-base font-extrabold text-slate-900">Instant Checkout</h3>
+              <Zap className="w-4 h-4 text-orange-600 fill-orange-600" />
+              <h3 className="text-sm font-bold text-zinc-950">Instant Checkout</h3>
             </div>
             <button
               onClick={closeQuickBuy}
-              className="p-1.5 text-slate-400 hover:text-slate-800 bg-slate-200/60 hover:bg-slate-200 rounded-full transition-colors"
+              className="p-1 text-zinc-400 hover:text-zinc-700 bg-zinc-100 hover:bg-zinc-200 rounded-md transition-colors cursor-pointer"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* Body */}
-          <div className="p-6 space-y-6">
+          <div className="p-5 space-y-4">
             {/* Bundle summary */}
-            <div className="flex items-center space-x-4 p-4 rounded-2xl bg-orange-50/50 border border-orange-200">
+            <div className="flex items-center space-x-3.5 p-3.5 rounded-xl bg-zinc-50 border border-zinc-200">
               <img
                 src={quickBuyBundle.thumbnail}
                 alt={quickBuyBundle.title}
-                className="w-16 h-20 object-cover rounded-xl border border-orange-200 shrink-0"
+                className="w-14 h-18 object-cover rounded-lg border border-zinc-200 shrink-0"
               />
               <div className="flex-1 min-w-0">
-                <span className="px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider bg-orange-100 text-brand-600 rounded">
+                <span className="px-1.5 py-0.2 text-[9px] font-semibold uppercase bg-zinc-200 text-zinc-800 rounded">
                   {quickBuyBundle.category}
                 </span>
-                <h4 className="text-sm font-extrabold text-slate-900 truncate mt-1">{quickBuyBundle.title}</h4>
-                <p className="text-xs text-slate-600 font-medium mt-0.5">{quickBuyBundle.videoCount} Vertical 1080p MP4 Videos</p>
-                <div className="mt-2 flex items-baseline space-x-2">
-                  <span className="text-lg font-black text-slate-900">₹{quickBuyBundle.price}</span>
-                  <span className="text-xs text-slate-400 line-through">₹{quickBuyBundle.originalPrice}</span>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">
+                <h4 className="text-xs font-bold text-zinc-950 truncate mt-1">{quickBuyBundle.title}</h4>
+                <p className="text-[11px] text-zinc-500 font-normal">{quickBuyBundle.videoCount} Vertical 1080p MP4 Videos</p>
+                <div className="mt-1.5 flex items-baseline space-x-2">
+                  <span className="text-base font-bold text-zinc-950">₹{quickBuyBundle.price}</span>
+                  <span className="text-xs text-zinc-400 line-through">₹{quickBuyBundle.originalPrice}</span>
+                  <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
                     Save {Math.round((1 - quickBuyBundle.price / quickBuyBundle.originalPrice) * 100)}%
                   </span>
                 </div>
@@ -214,63 +213,63 @@ export const QuickBuyModal: React.FC = () => {
             </div>
 
             {/* Payment Method Selector */}
-            <div className="space-y-3">
-              <label className="text-xs font-extrabold uppercase tracking-wider text-slate-700 block">
-                Select Payment Option
+            <div className="space-y-2">
+              <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-600 block">
+                Payment Method
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2.5">
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('upi')}
-                  className={`p-3.5 rounded-xl border text-left flex items-center space-x-3 transition-all ${
+                  className={`p-3 rounded-xl border text-left flex items-center space-x-2.5 transition-colors cursor-pointer ${
                     paymentMethod === 'upi'
-                      ? 'bg-orange-50 border-brand-500 text-slate-900 shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                      ? 'bg-zinc-900 border-zinc-900 text-white shadow-xs'
+                      : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300'
                   }`}
                 >
-                  <Smartphone className={`w-5 h-5 ${paymentMethod === 'upi' ? 'text-brand-500' : 'text-slate-400'}`} />
+                  <Smartphone className={`w-4 h-4 shrink-0 ${paymentMethod === 'upi' ? 'text-orange-400' : 'text-zinc-400'}`} />
                   <div>
-                    <p className="text-xs font-bold">UPI / GPay / PhonePe</p>
-                    <p className="text-[10px] text-slate-500 font-medium">Instant Verification</p>
+                    <p className="text-xs font-semibold">UPI / QR Code</p>
+                    <p className={`text-[10px] ${paymentMethod === 'upi' ? 'text-zinc-300' : 'text-zinc-400'}`}>Instant Verification</p>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('card')}
-                  className={`p-3.5 rounded-xl border text-left flex items-center space-x-3 transition-all ${
+                  className={`p-3 rounded-xl border text-left flex items-center space-x-2.5 transition-colors cursor-pointer ${
                     paymentMethod === 'card'
-                      ? 'bg-orange-50 border-brand-500 text-slate-900 shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                      ? 'bg-zinc-900 border-zinc-900 text-white shadow-xs'
+                      : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300'
                   }`}
                 >
-                  <CreditCard className={`w-5 h-5 ${paymentMethod === 'card' ? 'text-brand-500' : 'text-slate-400'}`} />
+                  <CreditCard className={`w-4 h-4 shrink-0 ${paymentMethod === 'card' ? 'text-orange-400' : 'text-zinc-400'}`} />
                   <div>
-                    <p className="text-xs font-bold">Credit / Debit Card</p>
-                    <p className="text-[10px] text-slate-500 font-medium">All major cards</p>
+                    <p className="text-xs font-semibold">Debit / Card</p>
+                    <p className={`text-[10px] ${paymentMethod === 'card' ? 'text-zinc-300' : 'text-zinc-400'}`}>All Major Cards</p>
                   </div>
                 </button>
               </div>
             </div>
 
             {/* Security Guarantee */}
-            <div className="flex items-center space-x-2 text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Razorpay Mock Sandbox • Instant Lifetime Access & Drive Link</span>
+            <div className="flex items-center space-x-2 text-[11px] text-zinc-600 bg-zinc-50 p-2.5 rounded-lg border border-zinc-200">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>Commercial License & Lifetime Cloud Access Included</span>
             </div>
 
             {/* Action CTA */}
             <button
               onClick={handleConfirmPurchase}
               disabled={isProcessing}
-              className="w-full py-4 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white text-sm font-black rounded-2xl shadow-xl orange-glow transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+              className="w-full py-3 bg-orange-600 hover:bg-orange-500 text-white text-xs sm:text-sm font-semibold rounded-lg shadow-xs transition-colors flex items-center justify-center space-x-1.5 disabled:opacity-50 cursor-pointer"
             >
               {isProcessing ? (
                 <span>Processing Order...</span>
               ) : (
                 <>
-                  <span>Complete Purchase (₹{quickBuyBundle.price})</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Pay & Unlock — ₹{quickBuyBundle.price}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </>
               )}
             </button>

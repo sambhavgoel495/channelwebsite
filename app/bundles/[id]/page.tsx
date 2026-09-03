@@ -13,9 +13,7 @@ import {
   Zap, 
   Lock, 
   ArrowRight,
-  FolderDown,
   Sparkles,
-  Video,
   ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
@@ -116,7 +114,7 @@ export default function BundleDetailsPage() {
   if (loading) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <p className="text-sm font-bold text-slate-500">
+        <p className="text-sm font-semibold text-zinc-500">
           Loading bundle & demo videos...
         </p>
       </div>
@@ -125,16 +123,16 @@ export default function BundleDetailsPage() {
 
   if (error) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4 bg-rose-50 border border-rose-200 rounded-3xl m-8 p-8">
-        <h2 className="text-xl font-black text-rose-800">
-          Failed to load bundle videos from Supabase
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center space-y-4 bg-rose-50 border border-rose-200 rounded-2xl m-8 p-8">
+        <h2 className="text-lg font-bold text-rose-800">
+          Failed to load bundle videos
         </h2>
         <p className="text-xs text-rose-600 font-medium max-w-md mx-auto">
           {error}
         </p>
         <button
           onClick={loadBundle}
-          className="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-black rounded-xl shadow-md transition-colors"
+          className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors"
         >
           Retry Loading
         </button>
@@ -145,7 +143,7 @@ export default function BundleDetailsPage() {
   if (!bundle) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-xl font-black text-slate-900">
+        <h2 className="text-lg font-bold text-zinc-900">
           Bundle not found
         </h2>
       </div>
@@ -158,17 +156,13 @@ export default function BundleDetailsPage() {
   const mockFallback = MOCK_BUNDLES.find((b) => String(b.id) === String(bundle.id));
   const demoClips = videos.length > 0 ? videos.slice(0, 2) : (mockFallback?.freeDemos || []);
 
-  const handleMockDownload = () => {
-    addToast(`📥 Download Started: "${bundle.title}" (1080p 9:16 MP4 Archive). Check your downloads folder.`, 'success');
-  };
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 pb-24">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10 pb-20">
       {/* Breadcrumb */}
-      <div className="flex items-center space-x-2 text-xs font-bold text-slate-500">
-        <Link href="/" className="hover:text-brand-600 transition-colors">Home</Link>
+      <div className="flex items-center space-x-2 text-xs font-medium text-zinc-500">
+        <Link href="/" className="hover:text-zinc-900 transition-colors">Home</Link>
         <span>/</span>
-        <span className="text-slate-900 truncate">{bundle.title}</span>
+        <span className="text-zinc-900 truncate font-semibold">{bundle.title}</span>
       </div>
 
       {/* Main Bundle Details Grid */}
@@ -177,53 +171,53 @@ export default function BundleDetailsPage() {
         {/* LEFT COLUMN: Demo Videos OR Vertical Combo Poster Box */}
         <div className="lg:col-span-6 space-y-4">
           {String(bundle.id) === '5' || bundle.category === 'Combo' ? (
-            /* Vertical 9:16 Combo Poster Box (Black Background, No Demo Videos) */
-            <div className="relative aspect-[9/16] w-full rounded-3xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden flex flex-col justify-between p-4 group">
+            /* Vertical 9:16 Combo Poster Box */
+            <div className="relative aspect-[9/16] w-full rounded-2xl bg-zinc-950 border border-zinc-800 shadow-card overflow-hidden flex flex-col justify-between p-4 group">
               {/* 2x2 Image Collage */}
-              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-1 p-1 bg-slate-950">
-                <img src="/roblox_reels_bundle.jpg" alt="Roblox Reels" className="w-full h-full object-cover rounded-2xl opacity-90 group-hover:scale-105 transition-transform duration-500" />
-                <img src="/car_crash_bundle.jpg" alt="Car Crash" className="w-full h-full object-cover rounded-2xl opacity-90 group-hover:scale-105 transition-transform duration-500" />
-                <img src="/ai_girls_dancing_bundle.png" alt="AI Girls" className="w-full h-full object-cover rounded-2xl opacity-90 group-hover:scale-105 transition-transform duration-500" />
-                <img src="/stickman_content_bundle.jpg" alt="Stickman" className="w-full h-full object-cover rounded-2xl opacity-90 group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-1 p-1 bg-zinc-950">
+                <img src="/roblox_reels_bundle.jpg" alt="Roblox Reels" className="w-full h-full object-cover rounded-xl opacity-90 group-hover:scale-[1.03] transition-transform duration-300" />
+                <img src="/car_crash_bundle.jpg" alt="Car Crash" className="w-full h-full object-cover rounded-xl opacity-90 group-hover:scale-[1.03] transition-transform duration-300" />
+                <img src="/ai_girls_dancing_bundle.png" alt="AI Girls" className="w-full h-full object-cover rounded-xl opacity-90 group-hover:scale-[1.03] transition-transform duration-300" />
+                <img src="/stickman_content_bundle.jpg" alt="Stickman" className="w-full h-full object-cover rounded-xl opacity-90 group-hover:scale-[1.03] transition-transform duration-300" />
               </div>
 
               {/* Gradient overlays for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/60 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-zinc-950/60 pointer-events-none" />
 
               {/* Top Badges */}
               <div className="relative z-10 flex items-center justify-between">
-                <span className="px-3 py-1 text-xs font-black uppercase tracking-wider bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 text-white rounded-xl shadow-lg orange-glow">
-                  🔥 4-IN-1 MEGA COMBO
+                <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-orange-600 text-white rounded-md shadow-xs">
+                  4-IN-1 MEGA COMBO
                 </span>
-                <span className="px-2.5 py-1 text-xs font-extrabold bg-slate-900/90 text-amber-400 rounded-xl border border-slate-700 backdrop-blur-md">
+                <span className="px-2 py-0.5 text-xs font-medium bg-zinc-900/90 text-amber-400 rounded-md border border-zinc-800 backdrop-blur-sm">
                   15,000+ CLIPS
                 </span>
               </div>
 
               {/* Center Combo Overlay Badge */}
               <div className="relative z-10 text-center space-y-2 py-6">
-                <div className="inline-flex items-center space-x-2 px-4 py-2 bg-black/80 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl">
-                  <Sparkles className="w-5 h-5 text-amber-400 fill-amber-400 animate-pulse" />
-                  <span className="text-sm font-black text-white uppercase tracking-wider">ALL 4 VAULTS INCLUDED</span>
+                <div className="inline-flex items-center space-x-2 px-3 py-1.5 bg-black/80 backdrop-blur-md rounded-xl border border-white/10 shadow-xs">
+                  <Sparkles className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  <span className="text-xs font-bold text-white uppercase tracking-wider">ALL 4 VAULTS INCLUDED</span>
                 </div>
               </div>
 
               {/* Bottom Specs Overlay */}
-              <div className="relative z-10 p-4 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-800 space-y-2">
-                <div className="flex items-center justify-between text-xs font-bold text-slate-300">
-                  <span>🎮 Roblox (3,000+)</span>
-                  <span>🚗 Car Crash (8,000+)</span>
+              <div className="relative z-10 p-3.5 bg-zinc-900/90 backdrop-blur-md rounded-xl border border-zinc-800 space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-medium text-zinc-300">
+                  <span>Roblox (3,000+)</span>
+                  <span>Car Crash (8,000+)</span>
                 </div>
-                <div className="flex items-center justify-between text-xs font-bold text-slate-300">
-                  <span>💃 AI Dancing (3,000+)</span>
-                  <span>🥷 Stickman (1,000+)</span>
+                <div className="flex items-center justify-between text-xs font-medium text-zinc-300">
+                  <span>AI Dancing (3,000+)</span>
+                  <span>Stickman (1,000+)</span>
                 </div>
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-                  <span className="text-[11px] font-black uppercase text-amber-400 flex items-center space-x-1">
+                <div className="pt-2 border-t border-zinc-800 flex items-center justify-between">
+                  <span className="text-[11px] font-semibold uppercase text-amber-400 flex items-center space-x-1">
                     <ShieldCheck className="w-3.5 h-3.5" />
                     <span>Commercial License Included</span>
                   </span>
-                  <span className="text-xs font-black text-white bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">
+                  <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded border border-emerald-500/25">
                     SAVE ₹1,350
                   </span>
                 </div>
@@ -232,61 +226,61 @@ export default function BundleDetailsPage() {
           ) : (
             /* Standard DEMO VIDEOS for Individual Bundles */
             <>
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <div className="flex items-center justify-between border-b border-zinc-200 pb-2.5">
                 <div className="flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 text-brand-500" />
-                  <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">
-                    DEMO VIDEOS
+                  <Play className="w-4 h-4 text-orange-600 fill-orange-600" />
+                  <h2 className="text-sm font-bold text-zinc-950 uppercase tracking-wide">
+                    Free Previews
                   </h2>
                 </div>
-                <span className="px-2.5 py-0.5 text-[10px] font-black uppercase bg-orange-100 text-brand-600 rounded border border-orange-200">
-                  2 Free 9:16 Previews
+                <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-zinc-100 text-zinc-700 rounded border border-zinc-200">
+                  2 HD Previews
                 </span>
               </div>
 
               {/* 2 Vertical 9:16 Reel Cards Grid */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3.5">
                 {demoClips.map((demo, idx) => (
                   <div
                     key={demo.id || idx}
                     onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.video_url || demo.videoUrl, duration: demo.duration })}
-                    className="group relative bg-slate-900 rounded-3xl border border-slate-200 hover:border-brand-400 overflow-hidden shadow-xl cursor-pointer transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                    className="group relative bg-white rounded-xl border border-zinc-200 hover:border-zinc-300 overflow-hidden shadow-card hover:shadow-card-hover cursor-pointer transition-all duration-200 flex flex-col"
                   >
                     {/* 9:16 Aspect Reel Box */}
-                    <div className="relative aspect-[9/16] w-full overflow-hidden">
+                    <div className="relative aspect-[9/16] w-full overflow-hidden bg-zinc-950">
                       <img
                         src={demo.thumbnail}
                         alt={demo.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
 
                       {/* Top Demo Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-                        <span className="px-2 py-0.5 text-[9px] font-black uppercase bg-brand-500 text-white rounded shadow-sm">
+                      <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10">
+                        <span className="px-1.5 py-0.5 text-[9px] font-semibold uppercase bg-orange-600 text-white rounded shadow-xs">
                           DEMO #{idx + 1}
                         </span>
-                        <span className="px-2 py-0.5 text-[9px] font-bold bg-slate-900/80 text-white rounded backdrop-blur-sm">
+                        <span className="px-1.5 py-0.5 text-[9px] font-medium bg-black/60 text-white rounded backdrop-blur-sm">
                           {demo.duration}
                         </span>
                       </div>
 
                       {/* Center Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 h-12 rounded-full bg-white/90 border border-white/40 backdrop-blur-md flex items-center justify-center group-hover:bg-brand-500 group-hover:scale-110 transition-all duration-300 shadow-2xl">
-                          <Play className="w-5 h-5 text-brand-600 fill-brand-600 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
+                        <div className="w-10 h-10 rounded-full bg-white/90 border border-white/40 flex items-center justify-center group-hover:bg-orange-600 group-hover:scale-105 transition-all shadow-xs">
+                          <Play className="w-4 h-4 text-zinc-900 fill-zinc-900 ml-0.5 group-hover:text-white group-hover:fill-white transition-colors" />
                         </div>
                       </div>
                     </div>
 
                     {/* Card Bottom Details & Watch Button */}
-                    <div className="p-3 bg-white space-y-2 border-t border-slate-100 flex-1 flex flex-col justify-between">
+                    <div className="p-3 bg-white space-y-2 border-t border-zinc-100 flex-1 flex flex-col justify-between">
                       <div>
-                        <span className="text-[9px] font-black uppercase text-brand-600 block">9:16 Vertical HD</span>
-                        <p className="text-xs font-extrabold text-slate-900 truncate mt-0.5">{demo.title}</p>
+                        <span className="text-[9px] font-semibold uppercase text-orange-600 block">9:16 Vertical HD</span>
+                        <p className="text-xs font-bold text-zinc-950 truncate mt-0.5">{demo.title}</p>
                       </div>
 
-                      <button className="w-full py-2 bg-slate-100 group-hover:bg-brand-500 text-slate-800 group-hover:text-white text-[11px] font-extrabold rounded-xl transition-all duration-300 flex items-center justify-center space-x-1 shadow-sm">
+                      <button className="w-full py-1.5 bg-zinc-100 group-hover:bg-zinc-900 text-zinc-700 group-hover:text-white text-xs font-semibold rounded-lg transition-colors flex items-center justify-center space-x-1 cursor-pointer">
                         <Play className="w-3 h-3 fill-current" />
                         <span>Watch Demo</span>
                       </button>
@@ -299,59 +293,59 @@ export default function BundleDetailsPage() {
         </div>
 
         {/* RIGHT COLUMN: Bundle Information & Purchase CTA */}
-        <div className="lg:col-span-6 space-y-6">
-          <div className="space-y-3">
-            <div className="flex items-center space-x-3">
-              <span className="px-2.5 py-1 text-xs font-black uppercase bg-orange-100 text-brand-600 border border-orange-200 rounded-lg">
+        <div className="lg:col-span-6 space-y-5">
+          <div className="space-y-2.5">
+            <div className="flex items-center space-x-2.5">
+              <span className="px-2.5 py-0.5 text-[11px] font-semibold uppercase bg-zinc-100 text-zinc-800 border border-zinc-200 rounded-md">
                 {bundle.category}
               </span>
-              <div className="flex items-center space-x-1 text-amber-500 text-xs font-bold">
-                <Star className="w-4 h-4 fill-amber-400" />
-                <span>{bundle.rating} ({bundle.reviewsCount} creator reviews)</span>
+              <div className="flex items-center space-x-1 text-amber-500 text-xs font-medium">
+                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <span>{bundle.rating} ({bundle.reviewsCount} reviews)</span>
               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight">
               {bundle.title}
             </h1>
 
-            <p className="text-sm font-extrabold text-brand-600">
+            <p className="text-xs sm:text-sm font-semibold text-orange-600">
               {bundle.tagline}
             </p>
 
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal">
               {bundle.description}
             </p>
           </div>
 
           {/* Quick Specifications Strip */}
-          <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+          <div className="grid grid-cols-3 gap-3 p-3.5 rounded-xl bg-white border border-zinc-200 shadow-card">
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-500">Total Videos</span>
-              <p className="text-sm font-black text-slate-900 mt-0.5">{bundle.videoCount} Clips</p>
+              <span className="text-[10px] uppercase font-semibold text-zinc-400 block">Total Videos</span>
+              <p className="text-xs font-bold text-zinc-900 mt-0.5">{bundle.videoCount} Clips</p>
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-500">Format</span>
-              <p className="text-sm font-black text-slate-900 mt-0.5">9:16 Vertical</p>
+              <span className="text-[10px] uppercase font-semibold text-zinc-400 block">Format</span>
+              <p className="text-xs font-bold text-zinc-900 mt-0.5">9:16 Vertical</p>
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-500">Resolution</span>
-              <p className="text-sm font-black text-slate-900 mt-0.5">1080p MP4</p>
+              <span className="text-[10px] uppercase font-semibold text-zinc-400 block">Resolution</span>
+              <p className="text-xs font-bold text-zinc-900 mt-0.5">1080p MP4</p>
             </div>
           </div>
 
           {/* Pricing Box & CTA */}
-          <div className="p-6 rounded-3xl bg-white border border-slate-200 space-y-4 shadow-xl">
+          <div className="p-5 rounded-xl bg-white border border-zinc-200 space-y-3.5 shadow-card">
             <div className="flex items-baseline justify-between">
               <div>
-                <span className="text-xs text-slate-500 block uppercase font-bold tracking-wider">Lifetime Bundle Price</span>
-                <div className="flex items-baseline space-x-3 mt-1">
-                  <span className="text-3xl font-black text-slate-900">₹{bundle.price}</span>
+                <span className="text-[10px] text-zinc-400 block uppercase font-semibold tracking-wider">Bundle Price</span>
+                <div className="flex items-baseline space-x-2 mt-0.5">
+                  <span className="text-2xl font-bold text-zinc-950">₹{bundle.price}</span>
                   {bundle.originalPrice && (
-                    <span className="text-sm text-slate-400 line-through">₹{bundle.originalPrice}</span>
+                    <span className="text-xs text-zinc-400 line-through font-normal">₹{bundle.originalPrice}</span>
                   )}
                   {bundle.originalPrice && bundle.price && (
-                    <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-emerald-100 text-emerald-700 rounded-md border border-emerald-200">
+                    <span className="px-1.5 py-0.5 text-[10px] font-semibold uppercase bg-emerald-50 text-emerald-700 rounded border border-emerald-200">
                       {Math.round(((bundle.originalPrice - bundle.price) / bundle.originalPrice) * 100)}% OFF
                     </span>
                   )}
@@ -360,10 +354,10 @@ export default function BundleDetailsPage() {
             </div>
 
             {isPurchased ? (
-              <div className="space-y-3">
-                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-bold flex items-center space-x-2">
+              <div className="space-y-2.5">
+                <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-xs font-semibold flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>You own this bundle! Instant downloads available.</span>
+                  <span>You own this bundle! Instant access unlocked.</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {String(bundle.id) === '7' ? (
@@ -391,40 +385,40 @@ export default function BundleDetailsPage() {
                       )}
                       target={bundle.driveUrl || String(bundle.id) === '1' || String(bundle.id) === '2' || String(bundle.id) === '4' || String(bundle.id) === '8' || String(bundle.id) === '9' ? '_blank' : undefined}
                       rel="noopener noreferrer"
-                      className="py-3 bg-gradient-to-r from-brand-500 to-orange-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md orange-glow transition-all"
+                      className="py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-semibold text-xs rounded-lg flex items-center justify-center space-x-1.5 shadow-xs transition-colors"
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                       <span>Google Drive</span>
                     </a>
                   )}
                   <Link
                     href="/my-library"
-                    className="py-3 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs rounded-xl flex items-center justify-center space-x-1.5 shadow-md"
+                    className="py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white font-semibold text-xs rounded-lg flex items-center justify-center space-x-1.5 shadow-xs transition-colors"
                   >
                     <span>My Library</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
             ) : (
               <button
                 onClick={() => openQuickBuy(bundle)}
-                className="w-full py-4 bg-gradient-to-r from-brand-500 via-orange-500 to-amber-500 hover:from-brand-600 hover:to-orange-600 text-white font-black text-sm rounded-2xl shadow-xl orange-glow transition-transform hover:scale-[1.02] flex items-center justify-center space-x-2"
+                className="w-full py-3 bg-orange-600 hover:bg-orange-500 text-white font-semibold text-xs sm:text-sm rounded-lg shadow-xs transition-colors flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Zap className="w-4 h-4 fill-white" />
-                <span>Buy & Unlock Instant Access — ₹{bundle.price}</span>
+                <span>Unlock Instant Access — ₹{bundle.price}</span>
               </button>
             )}
 
-            <div className="flex items-center justify-around text-[11px] text-slate-500 font-bold pt-2 border-t border-slate-100">
+            <div className="flex items-center justify-around text-[11px] text-zinc-500 font-medium pt-2 border-t border-zinc-100">
               <span className="flex items-center space-x-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Commercial Rights</span>
               </span>
               <span>•</span>
               <span className="flex items-center space-x-1">
-                <Download className="w-3.5 h-3.5 text-brand-500" />
-                <span>Instant Google Drive Link</span>
+                <Download className="w-3.5 h-3.5 text-orange-600" />
+                <span>Instant Cloud Access</span>
               </span>
             </div>
           </div>
@@ -432,90 +426,60 @@ export default function BundleDetailsPage() {
 
       </div>
 
-      {/* Rich Roblox Sales Description (Rendered for Roblox Reels Bundle id: 1) */}
-      {String(bundle.id) === '1' && (
-        <RobloxBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Car Crash Sales Description (Rendered for Car Crash Bundle id: 2) */}
-      {String(bundle.id) === '2' && (
-        <CarCrashBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Stickman Sales Description (Rendered for Stickman Bundle id: 4) */}
-      {String(bundle.id) === '4' && (
-        <StickmanBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Combo Sales Description (Rendered for Combo Pack id: 5) */}
-      {(String(bundle.id) === '5' || bundle.category === 'Combo') && (
-        <ComboBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Satisfying Sales Description (Rendered for Satisfying Bundle id: 6) */}
-      {String(bundle.id) === '6' && (
-        <SatisfyingBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Motivational Sales Description (Rendered for Motivational Bundle id: 7) */}
-      {String(bundle.id) === '7' && (
-        <MotivationalBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Mix Reels Sales Description (Rendered for Mix Reels Bundle id: 8) */}
-      {String(bundle.id) === '8' && (
-        <MixBundleDescription bundle={bundle} />
-      )}
-
-      {/* Rich Free Fire Sales Description (Rendered for Free Fire Bundle id: 9) */}
-      {String(bundle.id) === '9' && (
-        <FreeFireBundleDescription bundle={bundle} />
-      )}
+      {/* Rich Bundle Sales Description Components */}
+      {String(bundle.id) === '1' && <RobloxBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '2' && <CarCrashBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '4' && <StickmanBundleDescription bundle={bundle} />}
+      {(String(bundle.id) === '5' || bundle.category === 'Combo') && <ComboBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '6' && <SatisfyingBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '7' && <MotivationalBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '8' && <MixBundleDescription bundle={bundle} />}
+      {String(bundle.id) === '9' && <FreeFireBundleDescription bundle={bundle} />}
 
       {/* What's Inside & Locked Grid Section */}
-      <div className="space-y-6 pt-6 border-t border-slate-200">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="space-y-4 pt-4 border-t border-zinc-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <span className="px-2 py-0.5 text-[10px] font-black uppercase bg-slate-100 text-slate-700 rounded border border-slate-200">
-              FULL CONTENT LIST
+            <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-zinc-100 text-zinc-700 rounded border border-zinc-200">
+              CONTENT LIST
             </span>
-            <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+            <h2 className="text-xl font-bold text-zinc-950 tracking-tight mt-1">
               What&apos;s Inside This Pack ({bundle.videoCount} Videos)
             </h2>
-            <p className="text-xs text-slate-600 font-medium mt-0.5">
-              All clips are pre-cropped to 9:16 vertical 1080p MP4 format with zero watermarks.
+            <p className="text-xs text-zinc-600 font-normal">
+              All clips are pre-formatted to 9:16 vertical 1080p MP4 with zero watermarks.
             </p>
           </div>
 
           {!isPurchased && (
             <button
               onClick={() => openQuickBuy(bundle)}
-              className="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-xs font-black rounded-xl shadow-md transition-colors flex items-center space-x-1.5 shrink-0"
+              className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors flex items-center space-x-1.5 shrink-0 cursor-pointer"
             >
-              <Zap className="w-3.5 h-3.5 fill-white" />
-              <span>Unlock All {bundle.videoCount} Clips for ₹{bundle.price}</span>
+              <Zap className="w-3.5 h-3.5 text-orange-400 fill-orange-400" />
+              <span>Unlock Pack for ₹{bundle.price}</span>
             </button>
           )}
         </div>
 
         {/* 12 Sample Locked Video Card Placeholders */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
           {Array.from({ length: 12 }).map((_, i) => (
             <div
               key={i}
-              className="group relative aspect-[9/16] rounded-2xl bg-slate-900 overflow-hidden border border-slate-200 shadow-sm"
+              className="group relative aspect-[9/16] rounded-xl bg-zinc-950 overflow-hidden border border-zinc-200 shadow-card"
             >
               <img
                 src={bundle.thumbnail}
                 alt={`Video #${i + 1}`}
-                className="w-full h-full object-cover filter blur-[3px] opacity-60 scale-105"
+                className="w-full h-full object-cover filter blur-[2px] opacity-60 scale-105"
               />
-              <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center space-y-2 p-2 text-center">
-                <div className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md flex items-center justify-center border border-white/20">
-                  <Lock className="w-4 h-4 text-amber-400" />
+              <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center space-y-1.5 p-2 text-center">
+                <div className="w-7 h-7 rounded-full bg-black/70 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                  <Lock className="w-3.5 h-3.5 text-amber-400" />
                 </div>
-                <span className="text-[10px] font-black text-white">Video #{i + 1}</span>
-                <span className="text-[8px] font-bold text-slate-300 uppercase">1080p 9:16 MP4</span>
+                <span className="text-[10px] font-semibold text-white">Video #{i + 1}</span>
+                <span className="text-[8px] font-medium text-zinc-300 uppercase">1080p 9:16 MP4</span>
               </div>
             </div>
           ))}

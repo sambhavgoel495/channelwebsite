@@ -7,14 +7,13 @@ import { useAuth } from '@/context/AuthContext';
 import { 
   Sparkles, 
   Search, 
-  User as UserIcon, 
   LogOut, 
   ShieldAlert, 
   Library, 
   Menu, 
   X, 
   ChevronDown,
-  PlayCircle
+  Play
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,7 +25,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-  // Prefetch all key routes immediately on mount for instant responsive navigation
+  // Prefetch key routes immediately on mount for instant navigation
   useEffect(() => {
     router.prefetch('/');
     router.prefetch('/bundles');
@@ -38,7 +37,7 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 15) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -62,40 +61,40 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-md py-3'
-            : 'bg-white/60 backdrop-blur-md border-b border-slate-200/50 py-4'
+            ? 'bg-white/90 backdrop-blur-md border-b border-zinc-200/90 shadow-xs py-2.5'
+            : 'bg-white/75 backdrop-blur-sm border-b border-zinc-200/60 py-3'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Left: Brand Logo & Name */}
-            <Link href="/" prefetch={true} className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 via-orange-500 to-amber-400 flex items-center justify-center shadow-lg orange-glow group-hover:scale-105 transition-transform">
-                <PlayCircle className="w-6 h-6 text-white fill-white/20" />
+            <Link href="/" prefetch={true} className="flex items-center space-x-2.5 group">
+              <div className="w-8 h-8 rounded-lg bg-zinc-950 text-white flex items-center justify-center shadow-xs group-hover:bg-zinc-800 transition-colors">
+                <Play className="w-3.5 h-3.5 text-orange-400 fill-orange-400 ml-0.5" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
-                  Little<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-pink-500">Vault</span>
+                <span className="text-base font-bold tracking-tight text-zinc-950">
+                  Little<span className="text-orange-600">Vault</span>
                 </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-slate-600 -mt-1">
+                <span className="text-[10px] font-semibold text-zinc-500 -mt-1 tracking-wide">
                   Creator Content
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md">
+            {/* Center Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center space-x-1 bg-zinc-100/90 p-1 rounded-lg border border-zinc-200/70">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   prefetch={true}
-                  className={`px-5 py-2 rounded-full text-sm font-bold transition-all relative ${
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all ${
                     isActive(link.href)
-                      ? 'text-white bg-gradient-to-r from-brand-500 to-orange-600 shadow-md'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+                      ? 'text-zinc-900 bg-white shadow-xs'
+                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/60'
                   }`}
                 >
                   {link.name}
@@ -104,15 +103,18 @@ export const Navbar: React.FC = () => {
             </nav>
 
             {/* Right Action Icons & Auth */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden md:flex items-center space-x-2.5">
               {/* Search Trigger */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 transition-all flex items-center space-x-2 text-sm"
+                className="px-3 py-1.5 rounded-lg bg-zinc-100/90 hover:bg-zinc-200/80 text-zinc-600 hover:text-zinc-900 border border-zinc-200/80 transition-colors flex items-center space-x-2 text-xs font-medium cursor-pointer"
                 title="Search bundles"
               >
-                <Search className="w-4 h-4 text-brand-500" />
-                <span className="text-xs text-slate-600 font-medium pr-2">Search...</span>
+                <Search className="w-3.5 h-3.5 text-zinc-400" />
+                <span>Search bundles...</span>
+                <kbd className="text-[10px] font-semibold bg-white px-1.5 py-0.5 rounded border border-zinc-200 text-zinc-400">
+                  ⌘K
+                </kbd>
               </button>
 
               {/* Logged in vs Logged out controls */}
@@ -120,33 +122,33 @@ export const Navbar: React.FC = () => {
                 <div className="relative">
                   <button
                     onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                    className="flex items-center space-x-2 p-1.5 pr-3 rounded-full bg-white border border-slate-200 hover:border-brand-500/50 shadow-sm transition-all"
+                    className="flex items-center space-x-2 p-1 pr-2.5 rounded-full bg-white border border-zinc-200 hover:border-zinc-300 shadow-xs transition-colors cursor-pointer"
                   >
                     <img
                       src={user.avatar}
                       alt={user.name}
-                      className="w-8 h-8 rounded-full object-cover border border-brand-500/50"
+                      className="w-7 h-7 rounded-full object-cover border border-zinc-200"
                     />
-                    <span className="text-xs font-bold text-slate-800 max-w-[100px] truncate">
+                    <span className="text-xs font-semibold text-zinc-800 max-w-[110px] truncate">
                       {user.name}
                     </span>
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-600" />
+                    <ChevronDown className="w-3 h-3 text-zinc-400" />
                   </button>
 
                   {/* Profile Dropdown */}
                   <AnimatePresence>
                     {profileDropdownOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 6, scale: 0.98 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-50 p-1.5"
+                        exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                        className="absolute right-0 mt-2 w-56 bg-white border border-zinc-200 rounded-xl shadow-dropdown overflow-hidden z-50 p-1.5"
                       >
-                        <div className="px-3 py-2.5 border-b border-slate-100 mb-1">
-                          <p className="text-xs font-bold text-slate-900 truncate">{user.name}</p>
-                          <p className="text-[11px] text-slate-600 truncate">{user.email}</p>
+                        <div className="px-3 py-2 border-b border-zinc-100 mb-1">
+                          <p className="text-xs font-bold text-zinc-900 truncate">{user.name}</p>
+                          <p className="text-[11px] text-zinc-500 truncate">{user.email}</p>
                           {user.isAdmin && (
-                            <span className="inline-block mt-1 px-2 py-0.5 text-[9px] font-bold uppercase bg-purple-100 text-purple-700 rounded border border-purple-200">
+                            <span className="inline-block mt-1 px-1.5 py-0.5 text-[9px] font-semibold uppercase bg-zinc-100 text-zinc-700 rounded border border-zinc-200">
                               Admin Access
                             </span>
                           )}
@@ -156,9 +158,9 @@ export const Navbar: React.FC = () => {
                           href="/my-library"
                           prefetch={true}
                           onClick={() => setProfileDropdownOpen(false)}
-                          className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-brand-600 hover:bg-orange-50 transition-colors"
+                          className="flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
                         >
-                          <Library className="w-4 h-4 text-brand-500" />
+                          <Library className="w-3.5 h-3.5 text-zinc-500" />
                           <span>My Purchased Library</span>
                         </Link>
 
@@ -166,9 +168,9 @@ export const Navbar: React.FC = () => {
                           href="/admin"
                           prefetch={true}
                           onClick={() => setProfileDropdownOpen(false)}
-                          className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:text-amber-600 hover:bg-amber-50 transition-colors"
+                          className="flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors"
                         >
-                          <ShieldAlert className="w-4 h-4 text-amber-500" />
+                          <ShieldAlert className="w-3.5 h-3.5 text-zinc-500" />
                           <span>Admin Dashboard</span>
                         </Link>
 
@@ -177,22 +179,22 @@ export const Navbar: React.FC = () => {
                             toggleAdmin();
                             setProfileDropdownOpen(false);
                           }}
-                          className="w-full text-left flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                          className="w-full text-left flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-semibold text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer"
                         >
-                          <Sparkles className="w-4 h-4 text-indigo-500" />
+                          <Sparkles className="w-3.5 h-3.5 text-zinc-500" />
                           <span>Toggle Admin View</span>
                         </button>
 
-                        <div className="border-t border-slate-100 my-1" />
+                        <div className="border-t border-zinc-100 my-1" />
 
                         <button
                           onClick={() => {
                             logout();
                             setProfileDropdownOpen(false);
                           }}
-                          className="w-full text-left flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors"
+                          className="w-full text-left flex items-center space-x-2 px-3 py-2 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                         >
-                          <LogOut className="w-4 h-4" />
+                          <LogOut className="w-3.5 h-3.5" />
                           <span>Sign Out</span>
                         </button>
                       </motion.div>
@@ -200,18 +202,18 @@ export const Navbar: React.FC = () => {
                   </AnimatePresence>
                 </div>
               ) : (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1.5">
                   <Link
                     href="/login"
                     prefetch={true}
-                    className="px-4 py-2 text-xs font-bold text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-all border border-transparent"
+                    className="px-3.5 py-1.5 text-xs font-semibold text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 rounded-lg transition-colors"
                   >
-                    Login
+                    Log In
                   </Link>
                   <Link
                     href="/signup"
                     prefetch={true}
-                    className="px-4 py-2 text-xs font-extrabold text-white bg-gradient-to-r from-brand-500 to-orange-600 hover:from-brand-600 hover:to-orange-700 rounded-xl shadow-md orange-glow transition-all hover:scale-105"
+                    className="px-3.5 py-1.5 text-xs font-semibold text-white bg-orange-600 hover:bg-orange-500 rounded-lg shadow-xs transition-colors"
                   >
                     Sign Up
                   </Link>
@@ -219,19 +221,19 @@ export const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Mobile Hamburger Button */}
-            <div className="flex md:hidden items-center space-x-2">
+            {/* Mobile Actions */}
+            <div className="flex md:hidden items-center space-x-1.5">
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-slate-700 hover:text-slate-900 bg-slate-100 rounded-lg"
+                className="p-2 text-zinc-600 hover:text-zinc-900 bg-zinc-100 rounded-lg cursor-pointer"
               >
-                <Search className="w-5 h-5 text-brand-500" />
+                <Search className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-slate-700 hover:text-slate-900 bg-slate-100 rounded-lg border border-slate-200"
+                className="p-2 text-zinc-700 hover:text-zinc-950 bg-zinc-100 rounded-lg border border-zinc-200 cursor-pointer"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -244,7 +246,7 @@ export const Navbar: React.FC = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white/95 border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 shadow-xl"
+              className="md:hidden bg-white border-b border-zinc-200 px-4 pt-3 pb-5 space-y-3 shadow-sm"
             >
               <div className="flex flex-col space-y-1">
                 {navLinks.map((link) => (
@@ -253,64 +255,60 @@ export const Navbar: React.FC = () => {
                     href={link.href}
                     prefetch={true}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                    className={`px-3 py-2 rounded-lg text-xs font-semibold transition-colors ${
                       isActive(link.href)
-                        ? 'text-brand-600 bg-orange-50 border border-orange-200'
-                        : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
+                        ? 'bg-zinc-900 text-white'
+                        : 'text-zinc-700 hover:bg-zinc-100'
                     }`}
                   >
                     {link.name}
                   </Link>
                 ))}
-
-                {isLoggedIn && (
-                  <Link
-                    href="/admin"
-                    prefetch={true}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="px-4 py-3 rounded-xl text-sm font-bold text-amber-600 hover:bg-amber-50 transition-all flex items-center space-x-2"
-                  >
-                    <ShieldAlert className="w-4 h-4" />
-                    <span>Admin Dashboard</span>
-                  </Link>
-                )}
               </div>
 
-              <div className="pt-3 border-t border-slate-200">
+              <div className="pt-2 border-t border-zinc-100">
                 {isLoggedIn && user ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3 px-2">
-                      <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover border border-brand-500" />
-                      <div>
-                        <p className="text-sm font-bold text-slate-900">{user.name}</p>
-                        <p className="text-xs text-slate-600">{user.email}</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2.5 px-2 py-1.5">
+                      <img src={user.avatar} alt={user.name} className="w-7 h-7 rounded-full object-cover border border-zinc-200" />
+                      <div className="truncate">
+                        <p className="text-xs font-bold text-zinc-900 truncate">{user.name}</p>
+                        <p className="text-[10px] text-zinc-500 truncate">{user.email}</p>
                       </div>
                     </div>
+                    <Link
+                      href="/admin"
+                      prefetch={true}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-3 py-2 rounded-lg text-xs font-semibold text-zinc-700 hover:bg-zinc-100"
+                    >
+                      Admin Dashboard
+                    </Link>
                     <button
                       onClick={() => {
                         logout();
                         setMobileMenuOpen(false);
                       }}
-                      className="w-full py-2.5 text-center text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 rounded-xl"
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 cursor-pointer"
                     >
                       Sign Out
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-2 pt-1">
                     <Link
                       href="/login"
                       prefetch={true}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="py-2.5 text-center text-xs font-bold text-slate-700 bg-slate-100 border border-slate-200 rounded-xl"
+                      className="text-center py-2 text-xs font-semibold text-zinc-800 bg-zinc-100 hover:bg-zinc-200 rounded-lg"
                     >
-                      Login
+                      Log In
                     </Link>
                     <Link
                       href="/signup"
                       prefetch={true}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="py-2.5 text-center text-xs font-bold text-white bg-gradient-to-r from-brand-500 to-orange-600 rounded-xl shadow-md"
+                      className="text-center py-2 text-xs font-semibold text-white bg-orange-600 hover:bg-orange-500 rounded-lg shadow-xs"
                     >
                       Sign Up
                     </Link>
