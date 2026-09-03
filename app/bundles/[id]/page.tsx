@@ -17,7 +17,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
-import { MOCK_BUNDLES } from '@/data/mockData';
+import { MOCK_BUNDLES, SAMPLE_VIDEOS } from '@/data/mockData';
 import { RobloxBundleDescription } from '@/components/RobloxBundleDescription';
 import { CarCrashBundleDescription } from '@/components/CarCrashBundleDescription';
 import { StickmanBundleDescription } from '@/components/StickmanBundleDescription';
@@ -155,7 +155,9 @@ export default function BundleDetailsPage() {
 
   // Demo clips fetched from Supabase public.videos for this bundle
   const mockFallback = MOCK_BUNDLES.find((b) => String(b.id) === String(bundle.id));
-  const demoClips = videos.length > 0 ? videos.slice(0, 2) : (mockFallback?.freeDemos || []);
+  const demoClips = String(bundle.id) === '3'
+    ? [SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-1')!, SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-2')!].filter(Boolean)
+    : (videos.length > 0 ? videos.slice(0, 2) : (mockFallback?.freeDemos || []));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10 pb-20">
@@ -171,7 +173,7 @@ export default function BundleDetailsPage() {
         
         {/* LEFT COLUMN: Demo Videos OR Vertical Combo Poster Box */}
         <div className="lg:col-span-6 space-y-4">
-          {String(bundle.id) === '5' || bundle.category === 'Combo' ? (
+          {String(bundle.id) === '5' || String(bundle.id) === '10' ? (
             /* Vertical 9:16 Combo Poster Box */
             <div className="relative aspect-[9/16] w-full rounded-2xl bg-zinc-950 border border-zinc-800 shadow-card overflow-hidden flex flex-col justify-between p-4 group">
               {/* 2x2 Image Collage */}
@@ -188,10 +190,10 @@ export default function BundleDetailsPage() {
               {/* Top Badges */}
               <div className="relative z-10 flex items-center justify-between">
                 <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-orange-600 text-white rounded-md shadow-xs">
-                  4-IN-1 MEGA COMBO
+                  {String(bundle.id) === '10' ? '8-IN-1 MASTER VAULT' : '4-IN-1 MEGA COMBO'}
                 </span>
                 <span className="px-2 py-0.5 text-xs font-medium bg-zinc-900/90 text-amber-400 rounded-md border border-zinc-800 backdrop-blur-sm">
-                  15,000+ CLIPS
+                  {String(bundle.id) === '10' ? '1,000,000+ CLIPS' : '100,000+ CLIPS'}
                 </span>
               </div>
 

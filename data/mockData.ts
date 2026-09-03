@@ -141,16 +141,80 @@ export const SAMPLE_VIDEOS: VideoItem[] = [
     format: '9:16 Vertical HD',
     category: 'Trending',
     viewsCount: '24.5M'
+  },
+  {
+    id: 'demo-ai-1',
+    title: 'AI Influencer Viral Dance Reel #1 💃',
+    duration: '0:15',
+    thumbnail: '/ai_girls_dancing_bundle.png',
+    videoUrl: '/aiinfluencerdemo1.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '8.6M'
+  },
+  {
+    id: 'demo-ai-2',
+    title: 'AI Influencer Viral Reel #2 ✨',
+    duration: '0:18',
+    thumbnail: '/ai_girls_dancing_bundle.png',
+    videoUrl: '/aiinfluencerdemo2.mp4',
+    format: '9:16 Vertical HD',
+    category: 'Trending',
+    viewsCount: '11.4M'
   }
 ];
 
 export const MOCK_CATEGORIES: Category[] = [
   { id: 'all', name: 'All Available Bundles', iconName: 'Grid', count: 8 },
-  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 6 },
+  { id: 'Trending', name: 'Trending Bundles', iconName: 'TrendingUp', count: 8 },
   { id: 'Combo', name: 'Combos', iconName: 'Flame', count: 1 },
+  { id: 'AllBundles', name: 'All Bundles', iconName: 'Layers', count: 1 },
 ];
 
 export const MOCK_BUNDLES: Bundle[] = [
+  {
+    id: '3',
+    title: '3000+ AI Influencer Reels Bundle',
+    slug: 'ai-girls-dancing-reels-bundle',
+    tagline: '3,000+ High Quality AI Influencer Dancing Reels',
+    description: '3,000+ HD AI influencer & dancing reels, crisp, clear & professional videos optimized for viral short-form growth.',
+    price: 39,
+    originalPrice: 399,
+    videoCount: 3000,
+    category: 'Trending',
+    categoryBadge: 'AI INFLUENCER',
+    formatBadge: '9:16 VERTICAL HD',
+    quality: '1080p 9:16 Vertical',
+    thumbnail: '/ai_girls_dancing_bundle.png',
+    previewVideoUrl: '/aiinfluencerdemo1.mp4',
+    isPopular: true,
+    isTrending: true,
+    rating: 5.0,
+    reviewsCount: 620,
+    freeDemos: [
+      SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-1') || SAMPLE_VIDEOS[SAMPLE_VIDEOS.length - 2],
+      SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-2') || SAMPLE_VIDEOS[SAMPLE_VIDEOS.length - 1]
+    ],
+    lockedVideosCount: 2998,
+    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
+      id: `ai-${i + 1}`,
+      title: `AI Influencer Clip #${i + 1}`,
+      duration: `0:${15 + (i % 12)}`,
+      thumbnail: '/ai_girls_dancing_bundle.png',
+      videoUrl: '/aiinfluencerdemo1.mp4',
+      format: '9:16 Vertical HD',
+      isLocked: true,
+      category: 'Trending'
+    })),
+    whatsInside: [
+      '3,000+ AI Influencer Dancing & Fashion Clips',
+      'Ultra Realistic Visuals & High Retention Beats',
+      'Vertical 9:16 Format for Shorts, Reels & TikTok',
+      'Full Commercial Rights Included',
+      'Organized Google Drive Folder'
+    ],
+    driveUrl: 'https://drive.google.com/drive/folders/1CVYKi_oDz3h7h5bBYEbUvf7ID9BI7uaB'
+  },
   {
     id: '1',
     title: 'Roblox Reels Bundle',
@@ -236,44 +300,6 @@ export const MOCK_BUNDLES: Bundle[] = [
       'Sorted by Mood (Shock, Joy, Confusion)'
     ],
     driveUrl: 'https://drive.google.com/drive/folders/1BEUAM2fnKo6drhy6P42mrM6sBTNWqWbV',
-  },
-  {
-    id: '3',
-    title: '3000+ AI Girls Dancing Reels Bundle',
-    slug: 'ai-girls-dancing-reels-bundle',
-    tagline: '3,000+ High Quality AI Girls Dancing Reels',
-    description: '3,000+ HD dancing reels, crisp, clear & professional videos optimized for viral short-form growth.',
-    price: 69,
-    originalPrice: 399,
-    videoCount: 3000,
-    category: 'Trending',
-    categoryBadge: 'AI GIRLS DANCING',
-    formatBadge: '9:16 VERTICAL HD',
-    quality: '1080p 9:16 Vertical',
-    thumbnail: '/ai_girls_dancing_bundle.png',
-    previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-playing-with-colorful-blocks-42646-large.mp4',
-    isPopular: false,
-    rating: 4.9,
-    reviewsCount: 189,
-    freeDemos: [SAMPLE_VIDEOS[3], SAMPLE_VIDEOS[0]],
-    lockedVideosCount: 58,
-    sampleVideos: Array.from({ length: 12 }).map((_, i) => ({
-      id: `tc2-${i + 1}`,
-      title: `Conversation Clip #${i + 1}`,
-      duration: `0:${15 + (i % 12)}`,
-      thumbnail: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-child-playing-with-colorful-blocks-42646-large.mp4',
-      format: '9:16 Vertical HD',
-      isLocked: true,
-      category: 'Conversations'
-    })),
-    whatsInside: [
-      '60 High Retention Conversation Clips',
-      'Crisp Audio & Clear Speech Moments',
-      'Vertical 9:16 Format for Shorts & Reels',
-      'Commercial Content Rights Included',
-      'Ready to overlay text & captions'
-    ]
   },
   {
     id: '4',

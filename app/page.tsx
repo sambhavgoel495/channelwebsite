@@ -30,13 +30,14 @@ export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { openVideoPreview, openQuickBuy } = useAuth();
 
+  const PRIORITY_ORDER = ['3', '1', '2', '4', '6', '7', '8', '9', '5', '10'];
+
   useEffect(() => {
     async function fetchBundles() {
       try {
         const { data, error } = await supabase
           .from('bundles')
-          .select('*')
-          .order('price', { ascending: true });
+          .select('*');
 
         if (error) {
           console.warn('Using local bundles fallback:', error.message);
@@ -58,19 +59,27 @@ export default function HomePage() {
             formatBadge: b.format_badge || '9:16 VERTICAL HD',
             quality: b.quality || '1080p 9:16 Vertical',
             thumbnail: b.thumbnail || '/roblox_reels_bundle.jpg',
-            previewVideoUrl: b.preview_video_url || '/robloxdemo1.mp4',
+            previewVideoUrl: b.preview_video_url || (String(b.id) === '3' ? '/aiinfluencerdemo1.mp4' : '/robloxdemo1.mp4'),
             isPopular: b.is_popular ?? true,
             isTrending: b.is_trending ?? true,
             rating: Number(b.rating) || 4.9,
             reviewsCount: Number(b.reviews_count) || 120,
-            freeDemos: b.free_demos || [],
+            freeDemos: String(b.id) === '3' 
+              ? [SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-1')!, SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-2')!].filter(Boolean)
+              : (b.free_demos || []),
             lockedVideosCount: Number(b.locked_videos_count) || 48,
             sampleVideos: b.sample_videos || [],
             whatsInside: b.whats_inside || [],
             driveUrl: b.drive_url,
           }));
 
-          setBundles(mappedBundles);
+          const sortedBundles = mappedBundles.sort((a, b) => {
+            const idxA = PRIORITY_ORDER.indexOf(String(a.id));
+            const idxB = PRIORITY_ORDER.indexOf(String(b.id));
+            return (idxA === -1 ? 99 : idxA) - (idxB === -1 ? 99 : idxB);
+          });
+
+          setBundles(sortedBundles);
         }
       } catch (err) {
         console.error('Error fetching bundles from Supabase:', err);
@@ -86,8 +95,10 @@ export default function HomePage() {
 
   const filteredBundles = (selectedCategory === 'All Available Bundles' || selectedCategory === 'All Videos')
     ? bundles.filter(b => b.category !== 'Combo' && String(b.id) !== '5' && String(b.id) !== '10')
-    : (selectedCategory === 'Combos' || selectedCategory === 'Combo Bundles' || selectedCategory.includes('Combo'))
-    ? bundles.filter(b => b.category === 'Combo' || String(b.id) === '5' || String(b.id) === '10')
+    : (selectedCategory === 'Combos' || selectedCategory === 'Combo Bundles')
+    ? bundles.filter(b => String(b.id) === '5')
+    : (selectedCategory === 'All Bundles' || selectedCategory === 'All Bundles Pack')
+    ? bundles.filter(b => String(b.id) === '10')
     : bundles.filter(b => (b.category === 'Trending' || b.isTrending || b.isPopular) && b.category !== 'Combo' && String(b.id) !== '5' && String(b.id) !== '10');
 
   const faqs = [
