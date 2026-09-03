@@ -120,6 +120,38 @@ export default function HomePage() {
     }
   ];
 
+  // 4 Featured Demo Reels for the 4-in-1 Combo section
+  const comboDemos = [
+    {
+      name: 'Roblox',
+      title: 'Roblox Viral Parkour Reel',
+      videoUrl: '/robloxdemo1.mp4',
+      thumbnail: '/roblox_reels_bundle.jpg',
+      badge: 'Roblox'
+    },
+    {
+      name: 'Car Crash',
+      title: 'BeamNG Car Crash Test',
+      videoUrl: '/carcrashdemo1.mp4',
+      thumbnail: '/car_crash_bundle.jpg',
+      badge: 'Car Crash'
+    },
+    {
+      name: 'AI Dancing',
+      title: 'AI Influencer Viral Dance Reel',
+      videoUrl: '/aiinfluencerdemo1.mp4',
+      thumbnail: '/ai_girls_dancing_bundle.png',
+      badge: 'AI Dancing'
+    },
+    {
+      name: 'Stickman',
+      title: 'Stickman Epic Action Reel',
+      videoUrl: '/stickmandemo1.mp4',
+      thumbnail: '/stickman_content_bundle.jpg',
+      badge: 'Stickman'
+    }
+  ];
+
   // 5 Featured Demo Reels for the All Bundles section
   const masterDemos = [
     {
@@ -221,22 +253,31 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* 4-in-1 Mini Visual Collage */}
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { title: 'Roblox (3K+)', img: '/roblox_reels_bundle.jpg' },
-                  { title: 'Car Crash (8K+)', img: '/car_crash_bundle.jpg' },
-                  { title: 'AI Girls (3K+)', img: '/ai_girls_dancing_bundle.png' },
-                  { title: 'Stickman (1K+)', img: '/stickman_content_bundle.jpg' },
-                ].map((item, idx) => (
-                  <div key={idx} className="relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 group">
-                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                    <span className="absolute bottom-1 left-1 right-1 text-[8px] font-medium text-white text-center truncate">
-                      {item.title}
-                    </span>
-                  </div>
-                ))}
+              {/* 4 Demo Videos with Play Overlay */}
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-400 flex items-center space-x-1">
+                  <Play className="w-3 h-3 fill-orange-400" />
+                  <span>Click to Watch Demo Previews (4 Demos):</span>
+                </span>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {comboDemos.map((demo, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => openVideoPreview({ title: demo.title, videoUrl: demo.videoUrl })}
+                      className="group relative aspect-[9/16] rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 cursor-pointer shadow-xs hover:border-orange-500 transition-colors"
+                    >
+                      <img src={demo.thumbnail} alt={demo.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-colors">
+                        <div className="w-5 h-5 rounded-full bg-white/90 flex items-center justify-center shadow-xs">
+                          <Play className="w-2.5 h-2.5 text-zinc-950 fill-zinc-950 ml-0.5" />
+                        </div>
+                      </div>
+                      <span className="absolute bottom-1 left-0.5 right-0.5 text-[8px] font-semibold text-white text-center truncate bg-black/70 rounded px-0.5">
+                        {demo.badge}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="p-3 bg-zinc-900 rounded-xl border border-zinc-800 space-y-1">
