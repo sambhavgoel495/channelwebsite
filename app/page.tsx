@@ -152,7 +152,7 @@ export default function HomePage() {
     }
   ];
 
-  // 5 Featured Demo Reels for the All Bundles section
+  // 6 Featured Demo Reels for the All Bundles section
   const masterDemos = [
     {
       name: 'Roblox Reel',
@@ -167,6 +167,13 @@ export default function HomePage() {
       videoUrl: '/carcrashdemo1.mp4',
       thumbnail: '/car_crash_bundle.jpg',
       badge: 'Car Crash'
+    },
+    {
+      name: 'AI Influencer',
+      title: 'AI Influencer Viral Dance Reel',
+      videoUrl: '/aiinfluencerdemo1.mp4',
+      thumbnail: '/ai_girls_dancing_bundle.png',
+      badge: 'AI Influencer'
     },
     {
       name: 'Satisfying',
@@ -342,13 +349,13 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* 5 Demo Videos with Play Overlay */}
+              {/* 6 Demo Videos with Play Overlay */}
               <div className="space-y-1.5">
                 <span className="text-[10px] font-semibold uppercase tracking-wider text-orange-400 flex items-center space-x-1">
                   <Play className="w-3 h-3 fill-orange-400" />
-                  <span>Click to Watch Demo Previews (5 Demos):</span>
+                  <span>Click to Watch Demo Previews (6 Demos):</span>
                 </span>
-                <div className="grid grid-cols-5 gap-1.5">
+                <div className="grid grid-cols-6 gap-1.5">
                   {masterDemos.map((demo, idx) => (
                     <div
                       key={idx}
