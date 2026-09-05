@@ -130,7 +130,7 @@ export const ComboBundleDescription: React.FC<Props> = ({ bundle }) => {
               <p className="text-xs text-slate-600 font-medium">High-retention 1080p AI influencer dancing reels for fast growth.</p>
             </div>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500">
-              <span>Individual: ₹39</span>
+              <span>Individual: ₹10</span>
               <span className="text-emerald-600 font-black">INCLUDED</span>
             </div>
           </div>

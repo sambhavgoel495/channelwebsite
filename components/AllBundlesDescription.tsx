@@ -98,7 +98,7 @@ export const AllBundlesDescription: React.FC<Props> = ({ bundle }) => {
                 </div>
               </div>
               <div className="pt-1.5 border-t border-zinc-100 flex items-center justify-between text-[10px] font-semibold text-zinc-500">
-                <span>Value: ₹39-₹99</span>
+                <span>Value: ₹10-₹99</span>
                 <span className="text-emerald-600 font-bold">INCLUDED</span>
               </div>
             </div>

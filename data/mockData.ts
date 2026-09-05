@@ -178,7 +178,7 @@ export const MOCK_BUNDLES: Bundle[] = [
     slug: 'ai-girls-dancing-reels-bundle',
     tagline: '3,000+ High Quality AI Influencer Dancing Reels',
     description: '3,000+ HD AI influencer & dancing reels, crisp, clear & professional videos optimized for viral short-form growth.',
-    price: 39,
+    price: 10,
     originalPrice: 399,
     videoCount: 3000,
     category: 'Trending',
