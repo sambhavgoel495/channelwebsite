@@ -212,6 +212,20 @@ export default function HomePage() {
           onSelectCategory={setSelectedCategory}
         />
 
+        {/* Eye-Catchy Creator Heading Line */}
+        <div className="pt-2 pb-1 space-y-1 text-center sm:text-left">
+          <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 bg-orange-500/10 border border-orange-500/25 rounded-full text-orange-600 text-[11px] font-bold uppercase tracking-wider">
+            <Sparkles className="w-3.5 h-3.5 text-orange-600 fill-orange-600 animate-pulse" />
+            <span>CREATOR ACCELERATOR</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-zinc-950 leading-tight">
+            <span className="text-orange-600">Buy</span>, <span className="text-orange-600">Upload</span>, <span className="text-zinc-950">Grow your channel</span> <span className="text-zinc-800">and start earning more</span> 🚀
+          </h2>
+          <p className="text-xs sm:text-sm text-zinc-600 font-normal">
+            High-retention 9:16 vertical reels crafted to explode your reach on Instagram Reels, YouTube Shorts &amp; TikTok.
+          </p>
+        </div>
+
         {/* Bundles Responsive Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-1">
           {filteredBundles.map((bundle) => (
