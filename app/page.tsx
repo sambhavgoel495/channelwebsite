@@ -447,9 +447,19 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 5 Featured Compact Demo Video Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
+          {/* 6 Featured Compact Demo Video Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5">
             {[
+              SAMPLE_VIDEOS.find(v => v.id === 'demo-ai-2') || {
+                id: 'demo-ai-2',
+                title: 'AI Influencer Viral Reel #2 ✨',
+                duration: '0:18',
+                thumbnail: '/ai_girls_dancing_bundle.png',
+                videoUrl: '/aiinfluencerdemo2.mp4',
+                format: '9:16 Vertical HD',
+                category: 'Trending',
+                viewsCount: '11.4M'
+              },
               SAMPLE_VIDEOS.find(v => v.id === 'demo-1') || SAMPLE_VIDEOS[0],
               SAMPLE_VIDEOS.find(v => v.id === 'demo-3') || SAMPLE_VIDEOS[2],
               SAMPLE_VIDEOS.find(v => v.id === 'demo-7') || SAMPLE_VIDEOS[4],
