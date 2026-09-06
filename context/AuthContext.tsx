@@ -20,7 +20,9 @@ interface AuthContextType {
   purchasedBundleIds: string[];
   login: (email?: string, name?: string) => void;
   loginWithPassword: (email: string, password: string) => Promise<{ success: boolean; error?: string; notFound?: boolean }>;
+  loginWithPhone: (phone: string, password: string) => Promise<{ success: boolean; error?: string; notFound?: boolean }>;
   signUpWithPassword: (email: string, password: string, name: string) => Promise<{ success: boolean; error?: string; alreadyExists?: boolean; needsEmailVerification?: boolean }>;
+  signUpWithPhone: (phone: string, password: string, name: string) => Promise<{ success: boolean; error?: string; alreadyExists?: boolean }>;
   loginWithGoogle: (redirectPath?: string) => Promise<void>;
   logout: () => void;
   toggleAdmin: () => void;
@@ -124,12 +126,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         const meta = session.user.user_metadata;
-        const displayName = meta?.full_name || meta?.name || session.user.email || 'Creator';
-        const userPhone = session.user.phone || meta?.phone || meta?.contact || '';
+        const rawEmail = session.user.email || '';
+        const isPhoneUser = rawEmail.endsWith('@phone.littlevault.com');
+        const userPhone = session.user.phone || meta?.phone || (isPhoneUser ? rawEmail.replace('@phone.littlevault.com', '') : '') || '';
+        const displayName = meta?.full_name || meta?.name || (userPhone ? `+91 ${userPhone}` : rawEmail) || 'Creator';
+        const displayEmail = isPhoneUser ? '' : rawEmail;
         const u = {
           id: session.user.id,
           name: displayName,
-          email: session.user.email || '',
+          email: displayEmail,
           phone: userPhone,
           avatar: meta?.avatar_url || defaultAvatar,
           isAdmin: false,
@@ -147,12 +152,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         const meta = session.user.user_metadata;
-        const displayName = meta?.full_name || meta?.name || session.user.email || 'Creator';
-        const userPhone = session.user.phone || meta?.phone || meta?.contact || '';
+        const rawEmail = session.user.email || '';
+        const isPhoneUser = rawEmail.endsWith('@phone.littlevault.com');
+        const userPhone = session.user.phone || meta?.phone || (isPhoneUser ? rawEmail.replace('@phone.littlevault.com', '') : '') || '';
+        const displayName = meta?.full_name || meta?.name || (userPhone ? `+91 ${userPhone}` : rawEmail) || 'Creator';
+        const displayEmail = isPhoneUser ? '' : rawEmail;
         const u = {
           id: session.user.id,
           name: displayName,
-          email: session.user.email || '',
+          email: displayEmail,
           phone: userPhone,
           avatar: meta?.avatar_url || defaultAvatar,
           isAdmin: false,
@@ -351,6 +359,166 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { success: false, error: 'Failed to create account. Please try again.' };
   };
 
+  const normalizePhone = (phoneStr: string) => {
+    let cleaned = phoneStr.replace(/\D/g, '');
+    if (cleaned.length > 10 && cleaned.startsWith('91')) {
+      cleaned = cleaned.substring(2);
+    }
+    return cleaned;
+  };
+
+  const loginWithPhone = async (
+    phone: string,
+    password: string
+  ): Promise<{ success: boolean; error?: string; notFound?: boolean }> => {
+    const cleanPhone = normalizePhone(phone);
+    if (!cleanPhone || cleanPhone.length < 10) {
+      return { success: false, error: 'Please enter a valid 10-digit mobile number.' };
+    }
+
+    const phoneEmail = `${cleanPhone}@phone.littlevault.com`;
+
+    // 1. Check if mobile number exists
+    try {
+      const { data: exists, error: rpcError } = await supabase.rpc('check_phone_exists', {
+        lookup_phone: cleanPhone,
+      });
+
+      if (!rpcError && exists === false) {
+        return {
+          success: false,
+          notFound: true,
+          error: 'Account not found with this mobile number. Please sign up first.',
+        };
+      }
+    } catch (err) {
+      console.warn('Could not verify phone existence via RPC:', err);
+    }
+
+    // 2. Perform Supabase Login
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: phoneEmail,
+      password: password,
+    });
+
+    if (error) {
+      const msg = error.message.toLowerCase();
+      if (msg.includes('invalid login credentials') || msg.includes('user not found') || msg.includes('invalid credential')) {
+        try {
+          const { data: exists } = await supabase.rpc('check_phone_exists', {
+            lookup_phone: cleanPhone,
+          });
+          if (exists === false) {
+            return {
+              success: false,
+              notFound: true,
+              error: 'Account not found with this mobile number. Please sign up first.',
+            };
+          }
+        } catch {
+          // fallback
+        }
+        return {
+          success: false,
+          error: 'Incorrect mobile number or password. Please try again.',
+        };
+      }
+
+      return {
+        success: false,
+        error: error.message || 'Login failed. Please check your credentials.',
+      };
+    }
+
+    if (data.user) {
+      const meta = data.user.user_metadata;
+      const displayName = meta?.full_name || meta?.name || `+91 ${cleanPhone}`;
+      addToast(`Welcome back, ${displayName}!`, 'success');
+      return { success: true };
+    }
+
+    return { success: false, error: 'Login failed. Please try again.' };
+  };
+
+  const signUpWithPhone = async (
+    phone: string,
+    password: string,
+    name: string
+  ): Promise<{ success: boolean; error?: string; alreadyExists?: boolean }> => {
+    const cleanPhone = normalizePhone(phone);
+    if (!cleanPhone || cleanPhone.length < 10) {
+      return { success: false, error: 'Please enter a valid 10-digit mobile number.' };
+    }
+
+    const cleanName = name.trim() || 'Creator';
+    const phoneEmail = `${cleanPhone}@phone.littlevault.com`;
+
+    // 1. Check if phone is already registered
+    try {
+      const { data: exists, error: rpcError } = await supabase.rpc('check_phone_exists', {
+        lookup_phone: cleanPhone,
+      });
+
+      if (!rpcError && exists === true) {
+        return {
+          success: false,
+          alreadyExists: true,
+          error: 'Account already exists with this mobile number. Please login.',
+        };
+      }
+    } catch (err) {
+      console.warn('Could not verify phone existence via RPC:', err);
+    }
+
+    // 2. Perform Supabase registration
+    const { data, error } = await supabase.auth.signUp({
+      email: phoneEmail,
+      password: password,
+      options: {
+        data: {
+          full_name: cleanName,
+          name: cleanName,
+          phone: cleanPhone,
+          auth_type: 'phone',
+        },
+      },
+    });
+
+    if (error) {
+      const msg = error.message.toLowerCase();
+      if (
+        msg.includes('already registered') ||
+        msg.includes('already exists') ||
+        msg.includes('user already registered')
+      ) {
+        return {
+          success: false,
+          alreadyExists: true,
+          error: 'Account already exists with this mobile number. Please login.',
+        };
+      }
+      return {
+        success: false,
+        error: error.message || 'Signup failed. Please try again.',
+      };
+    }
+
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+      return {
+        success: false,
+        alreadyExists: true,
+        error: 'Account already exists with this mobile number. Please login.',
+      };
+    }
+
+    if (data.session || data.user) {
+      addToast(`Account created successfully! Welcome, ${cleanName}!`, 'success');
+      return { success: true };
+    }
+
+    return { success: false, error: 'Failed to create account. Please try again.' };
+  };
+
   const loginWithGoogle = async (redirectPath?: string) => {
     const target = redirectPath ? `${window.location.origin}${redirectPath}` : `${window.location.origin}/my-library`;
     const { error } = await supabase.auth.signInWithOAuth({
@@ -455,7 +623,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         purchasedBundleIds,
         login,
         loginWithPassword,
+        loginWithPhone,
         signUpWithPassword,
+        signUpWithPhone,
         loginWithGoogle,
         logout,
         toggleAdmin,
